@@ -42,9 +42,12 @@ class ConfigData {
     return ConfigData(
       sortType: enumFromIndex(SortType.values, json['sortType']),
       viewType: enumFromIndex(ViewType.values, json['viewType']),
-      bookMetadata: enumFromIndex(BookMetadataEnum.values, json['bookMetadata']),
-      bookDownloader: enumFromIndex(BookDownloaderEnum.values, json['bookDownloader']),
-      wordDictionary: enumFromIndex(WordDictionaryEnum.values, json['wordDictionary']),
+      bookMetadata:
+          enumFromIndex(BookMetadataEnum.values, json['bookMetadata']),
+      bookDownloader:
+          enumFromIndex(BookDownloaderEnum.values, json['bookDownloader']),
+      wordDictionary:
+          enumFromIndex(WordDictionaryEnum.values, json['wordDictionary']),
       wordsPerPage: json['wordsPerPage'] as double,
       themeMode: ThemeMode.values[json['themeMode']],
       // translationFromLanguage: TranslateLanguage.values[json['translationFromLanguage']],
@@ -146,12 +149,14 @@ class SettingsManager {
   }
 
   Future<List<Book>> loadAllBooks() async {
-    final List<Directory> bookDirectories = (await directory.list().toList()).whereType<Directory>().toList();
+    final List<Directory> bookDirectories =
+        (await directory.list().toList()).whereType<Directory>().toList();
 
     final books = await Future.wait(bookDirectories.map(
       (bookDirectory) async {
         try {
-          return (await BookSavedData.load(bookDirectory)).toBook(config.wordsPerPage);
+          return (await BookSavedData.load(bookDirectory))
+              .toBook(config.wordsPerPage);
         } catch (e) {
           await deleteBook(bookDirectory.uri.pathSegments.last);
           return null;
@@ -164,7 +169,8 @@ class SettingsManager {
 
   Future<Book> loadBookFromId(String bookId) async {
     final bookDirectory = p.join(directory.path, bookId);
-    return (await BookSavedData.load(Directory(bookDirectory))).toBook(config.wordsPerPage);
+    return (await BookSavedData.load(Directory(bookDirectory)))
+        .toBook(config.wordsPerPage);
   }
 
   Future<Shelf> createShelf(String name, {List<String>? initialBookIds}) async {
@@ -183,12 +189,15 @@ class SettingsManager {
   Future<List<ShelfConfig>> getShelvesConfig() async {
     final data = await _shelvesConfigFile.readAsString();
 
-    return (await json.decode(data) as List).map((entry) => ShelfConfig.fromJson(entry)).toList();
+    return (await json.decode(data) as List)
+        .map((entry) => ShelfConfig.fromJson(entry))
+        .toList();
   }
 
   Future<void> setShelvesConfig(List<ShelfConfig> shelfConfigs) async {
     await _shelvesConfigFile.writeAsString(
-      jsonEncode(shelfConfigs.map((shelfConfig) => shelfConfig.toJson()).toList()),
+      jsonEncode(
+          shelfConfigs.map((shelfConfig) => shelfConfig.toJson()).toList()),
     );
   }
 
@@ -230,7 +239,8 @@ class Shelf {
     await settingsManager.setShelvesConfig(shelvesConfig);
   }
 
-  static Future<Shelf> fromConfig(SettingsManager settingsManager, ShelfConfig shelfConfig) async {
+  static Future<Shelf> fromConfig(
+      SettingsManager settingsManager, ShelfConfig shelfConfig) async {
     return Shelf(
       settingsManager: settingsManager,
       id: shelfConfig.id,
@@ -256,7 +266,8 @@ class ShelfConfig {
   ShelfConfig.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         name = json["name"],
-        bookIds = json["bookIds"].map<String>((name) => name.toString()).toList();
+        bookIds =
+            json["bookIds"].map<String>((name) => name.toString()).toList();
 
   Map<String, dynamic> toJson() => {
         'id': id,

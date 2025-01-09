@@ -57,7 +57,7 @@ class BookInfoPreviousBookData {
 
 class BookInfo extends StatefulWidget {
   const BookInfo({
-    Key? key,
+    super.key,
     required this.book,
     required this.book3dData,
     this.previousBookData,
@@ -66,7 +66,7 @@ class BookInfo extends StatefulWidget {
     this.onPressAddToShelf,
     this.onPressSettings,
     required this.wordsPerPage,
-  }) : super(key: key);
+  });
 
   final Book book;
   final Book3DData book3dData;
@@ -102,7 +102,7 @@ class _BookInfo extends State<BookInfo> {
         ],
       ),
       body: Container(
-        color: Theme.of(context).backgroundColor,
+        color: Theme.of(context).colorScheme.surface,
         child: Stack(
           children: [
             widget.book.coverProvider == null
@@ -113,7 +113,10 @@ class _BookInfo extends State<BookInfo> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Theme.of(context).backgroundColor.withOpacity(0.25),
+                          Theme.of(context)
+                              .colorScheme
+                              .surface
+                              .withOpacity(0.25),
                           Colors.transparent,
                         ],
                       ).createShader(
@@ -150,12 +153,11 @@ class _BookInfo extends State<BookInfo> {
                                 wordsPerPage: widget.wordsPerPage,
                               ),
                               Container(
-                                margin: const EdgeInsets.symmetric(
-                                    vertical: 10),
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 10),
                                 width: size.width,
                                 height: 80,
-                                child:
-                                    MinimalBookInfoBar(book: widget.book),
+                                child: MinimalBookInfoBar(book: widget.book),
                               ),
                               Expanded(
                                 child: _Bottom(
@@ -189,11 +191,10 @@ class _BookInfo extends State<BookInfo> {
 
 class _Bottom extends StatefulWidget {
   const _Bottom({
-    Key? key,
     required this.book,
     required this.onMainButtonPress,
     required this.onSecondaryButtonPress,
-  }) : super(key: key);
+  });
 
   final Book book;
   final void Function() onMainButtonPress;
@@ -339,12 +340,11 @@ class _BottomState extends State<_Bottom> with SingleTickerProviderStateMixin {
 
 class _Top extends StatefulWidget {
   const _Top({
-    Key? key,
     required this.book,
     required this.book3dData,
     this.previousBookData,
     required this.wordsPerPage,
-  }) : super(key: key);
+  });
 
   final Book book;
   final Book3DData book3dData;
@@ -559,7 +559,8 @@ class _TopState extends State<_Top> {
                             end: Alignment.centerRight,
                             colors: [
                               Theme.of(context)
-                                  .backgroundColor
+                                  .colorScheme
+                                  .surface
                                   .withOpacity(0.25),
                               Colors.transparent,
                             ],

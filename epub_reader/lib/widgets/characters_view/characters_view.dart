@@ -7,10 +7,10 @@ import '../../providers/character_metadata/character_metadata.dart';
 
 class CharactersView extends StatefulWidget {
   const CharactersView({
-    Key? key,
+    super.key,
     required this.characterMetadata,
     this.initialQuery,
-  }) : super(key: key);
+  });
 
   final CharacterMetadata characterMetadata;
   final String? initialQuery;

@@ -11,11 +11,11 @@ import 'book_info.dart';
 
 class Search extends StatefulWidget {
   const Search({
-    Key? key,
+    super.key,
     required this.onBookDownload,
     required this.bookMetadataEnum,
     required this.settingsManager,
-  }) : super(key: key);
+  });
 
   final void Function(Book book) onBookDownload;
   final BookMetadataEnum bookMetadataEnum;
@@ -60,7 +60,7 @@ class _SearchState extends State<Search> {
           right: 10,
           top: 10,
         ),
-        color: Theme.of(context).backgroundColor,
+        color: Theme.of(context).colorScheme.surface,
         child: Column(
           children: [
             TextField(

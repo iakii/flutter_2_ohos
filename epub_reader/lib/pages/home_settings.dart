@@ -22,9 +22,9 @@ import 'package:path/path.dart' as p;
 
 class HomeSettings extends StatefulWidget {
   const HomeSettings({
-    Key? key,
+    super.key,
     required this.settingsManager,
-  }) : super(key: key);
+  });
 
   final SettingsManager settingsManager;
 
@@ -39,7 +39,8 @@ class _HomeSettingsState extends State<HomeSettings> {
   void initState() {
     super.initState();
     _textEditingController = TextEditingController(
-      text: removeLeadingZeros(widget.settingsManager.config.wordsPerPage.toString()),
+      text: removeLeadingZeros(
+          widget.settingsManager.config.wordsPerPage.toString()),
     );
   }
 
@@ -52,7 +53,7 @@ class _HomeSettingsState extends State<HomeSettings> {
         title: 'Settings',
       ),
       body: Container(
-        color: Theme.of(context).backgroundColor,
+        color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
@@ -137,7 +138,8 @@ class _HomeSettingsState extends State<HomeSettings> {
                     onChanged: (val) {
                       final wordsPerPage = double.tryParse(val);
                       if (wordsPerPage != null) {
-                        widget.settingsManager.config.wordsPerPage = wordsPerPage;
+                        widget.settingsManager.config.wordsPerPage =
+                            wordsPerPage;
                         widget.settingsManager.saveConfig();
                       }
                     },
@@ -218,17 +220,23 @@ class _HomeSettingsState extends State<HomeSettings> {
                       return;
                     }
 
-                    final characters = (json.decode(await file.readAsString()) as List).map((e) => Character.fromJson(e)).toList();
+                    final characters =
+                        (json.decode(await file.readAsString()) as List)
+                            .map((e) => Character.fromJson(e))
+                            .toList();
 
                     setState(() {
-                      widget.settingsManager.config.localCharacters[name!] = characters;
+                      widget.settingsManager.config.localCharacters[name!] =
+                          characters;
                     });
                     widget.settingsManager.saveConfig();
                   },
                 ),
                 Container(
                   height: 300,
-                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.1),
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white.withOpacity(0.1)
+                      : Colors.black.withOpacity(0.1),
                   child: ListView.builder(
                     padding: const EdgeInsets.all(0),
                     itemCount: localCharacters.keys.length,
@@ -280,15 +288,12 @@ class _HomeSettingsState extends State<HomeSettings> {
                       },
                     ),
                     TextButton(
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "Delete data",
-                        ),
-                      ),
                       onPressed: () async {
                         // Delete the current data
-                        final filesToDelete = await widget.settingsManager.directory.list().toList();
+                        final filesToDelete = await widget
+                            .settingsManager.directory
+                            .list()
+                            .toList();
                         for (final file in filesToDelete) {
                           await file.delete(recursive: true);
                         }
@@ -296,7 +301,13 @@ class _HomeSettingsState extends State<HomeSettings> {
                         Phoenix.rebirth(context);
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.red),
+                        backgroundColor: WidgetStateProperty.all(Colors.red),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Delete data",
+                        ),
                       ),
                     ),
                     TextButton(
@@ -329,7 +340,10 @@ class _HomeSettingsState extends State<HomeSettings> {
                         final dataZipFilePath = files!.single.path!;
 
                         // Delete the current data
-                        final filesToDelete = await widget.settingsManager.directory.list().toList();
+                        final filesToDelete = await widget
+                            .settingsManager.directory
+                            .list()
+                            .toList();
                         for (final file in filesToDelete) {
                           await file.delete(recursive: true);
                         }
@@ -360,11 +374,16 @@ class _HomeSettingsState extends State<HomeSettings> {
   }
 }
 
-Future<void> _zipDirectory(ZipFileEncoder zipFileEncoder, Directory dir, {String? filename, int? level, bool followLinks = true, DateTime? modified}) async {
+Future<void> _zipDirectory(ZipFileEncoder zipFileEncoder, Directory dir,
+    {String? filename,
+    int? level,
+    bool followLinks = true,
+    DateTime? modified}) async {
   final dirPath = dir.path;
   final zipPath = filename ?? '$dirPath.zip';
   level ??= ZipFileEncoder.GZIP;
   zipFileEncoder.create(zipPath, level: level, modified: modified);
-  await zipFileEncoder.addDirectory(dir, includeDirName: false, level: level, followLinks: followLinks);
+  await zipFileEncoder.addDirectory(dir,
+      includeDirName: false, level: level, followLinks: followLinks);
   zipFileEncoder.close();
 }

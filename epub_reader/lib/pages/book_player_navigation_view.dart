@@ -1,10 +1,9 @@
 import 'package:collection/collection.dart';
-import 'package:epubz/epubz.dart';
+import 'package:epubx/epubx.dart';
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../widgets/custom_expansion_tile.dart';
-import '../widgets/clean_app_bar.dart';
 import '../widgets/epub_renderer/epub_location.dart';
 
 class _Chapter {
@@ -32,12 +31,12 @@ class _Chapter {
 
 class BookPlayerNavigationView extends StatefulWidget {
   const BookPlayerNavigationView({
-    Key? key,
+    super.key,
     required this.chapters,
     required this.spineFiles,
     this.currentChapter,
     this.currentSpineFile,
-  }) : super(key: key);
+  });
 
   final List<EpubChapter> chapters;
   final List<EpubContentFile> spineFiles;
@@ -45,6 +44,7 @@ class BookPlayerNavigationView extends StatefulWidget {
   final EpubContentFile? currentSpineFile;
 
   @override
+  // ignore: library_private_types_in_public_api
   _BookPlayerNavigationViewState createState() =>
       _BookPlayerNavigationViewState();
 }
@@ -91,14 +91,14 @@ class _BookPlayerNavigationViewState extends State<BookPlayerNavigationView>
     const currentStyle = TextStyle(color: Colors.blue);
 
     return Scaffold(
-      appBar: const CleanAppBar(
-        title: 'Navigation',
-      ),
+      // appBar: const CleanAppBar(
+      //   title: 'Navigation',
+      // ),
       body: Column(
         children: [
           Container(
-            color: Theme.of(context).backgroundColor,
-            height: 50,
+            color: Theme.of(context).colorScheme.surface,
+            height: kToolbarHeight,
             child: TabBar(
               controller: tabController,
               labelStyle: Theme.of(context).textTheme.titleSmall,
@@ -135,12 +135,11 @@ class _BookPlayerNavigationViewState extends State<BookPlayerNavigationView>
 
 class _SpineView extends StatefulWidget {
   const _SpineView({
-    Key? key,
     required this.allChapters,
     required this.spineFiles,
     required this.currentSpineFile,
     required this.currentStyle,
-  }) : super(key: key);
+  });
 
   final List<EpubChapter> allChapters;
   final List<EpubContentFile> spineFiles;
@@ -219,12 +218,11 @@ class _SpineViewState extends State<_SpineView>
 
 class _ChaptersView extends StatefulWidget {
   const _ChaptersView({
-    Key? key,
     required this.chapters,
     required this.subChapters,
     required this.currentStyle,
     required this.currentChapter,
-  }) : super(key: key);
+  });
 
   final List<_Chapter> chapters;
   final List<List<_Chapter>> subChapters;

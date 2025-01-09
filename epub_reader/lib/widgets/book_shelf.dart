@@ -8,13 +8,13 @@ import '../models/book.dart';
 
 class BookShelf extends StatefulWidget {
   const BookShelf({
-    Key? key,
+    super.key,
     required this.shelf,
     required this.height,
     required this.onBookSelected,
     required this.onPressDelete,
     required this.onChangeBookShelves,
-  }) : super(key: key);
+  });
 
   final Shelf shelf;
   final double height;

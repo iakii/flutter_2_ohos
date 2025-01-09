@@ -5,7 +5,7 @@ import '../models/book.dart';
 import '../utils/remove_leading_zeros.dart';
 
 class MinimalBookInfoBar extends StatefulWidget {
-  const MinimalBookInfoBar({Key? key, required this.book}) : super(key: key);
+  const MinimalBookInfoBar({super.key, required this.book});
   final Book book;
 
   @override
@@ -80,8 +80,8 @@ class _MinimalBookInfoBarState extends State<MinimalBookInfoBar> {
 
 class _Separator extends StatelessWidget {
   const _Separator({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -95,11 +95,11 @@ class _Separator extends StatelessWidget {
 
 class _TextInfo extends StatelessWidget {
   const _TextInfo({
-    Key? key,
+    super.key,
     required this.value,
     required this.topic,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final String value;
   final String topic;

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:epub_reader/utils/get_files_from_epub_spine.dart';
 import 'package:epub_reader/widgets/epub_renderer/epub_location.dart';
 import 'package:epub_reader/widgets/epub_renderer/epub_server_files.dart';
-import 'package:epubz/epubz.dart';
+import 'package:epubx/epubx.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 // import 'package:shake/shake.dart';
@@ -23,7 +23,8 @@ class BookPlayerRendererController {
   BookPlayerRendererController({
     required this.style,
     required void Function() onClearSelection,
-    required void Function(EpubLocation epubLocation, {bool forced}) onSetLocation,
+    required void Function(EpubLocation epubLocation, {bool forced})
+        onSetLocation,
     required EpubRendererController Function() getCurrentController,
     required void Function(EpubStyleProperties) onStyle,
   })  : clearSelection = onClearSelection,
@@ -53,7 +54,7 @@ class _EpubRendererContainer {
 
 class BookPlayerRenderer extends StatefulWidget {
   BookPlayerRenderer({
-    Key? key,
+    super.key,
     required this.width,
     required this.height,
     required this.epubBook,
@@ -68,8 +69,7 @@ class BookPlayerRenderer extends StatefulWidget {
     this.dragAnimation,
     this.onNotePressed,
     this.nextPageOnShake,
-  })  : maxPages = epubBook.Schema!.Package!.Spine!.Items!.length,
-        super(key: key);
+  }) : maxPages = epubBook.Schema!.Package!.Spine!.Items!.length;
 
   final double width;
   final double height;
@@ -77,10 +77,13 @@ class BookPlayerRenderer extends StatefulWidget {
   final EpubLocation initialLocation;
   final void Function(EpubSelectionData selection) onSelection;
   final int maxPages;
-  final void Function(BookPlayerRendererController controller)? controllerCreated;
+  final void Function(BookPlayerRendererController controller)?
+      controllerCreated;
   final EpubServerFiles server;
   final EpubStyleProperties initialStyle;
-  final void Function(EpubLocation<int, EpubConsistentInnerNavigation> epubLocation)? onSaveLocation;
+  final void Function(
+          EpubLocation<int, EpubConsistentInnerNavigation> epubLocation)?
+      onSaveLocation;
   final List<SavedNote> savedNotes;
   final Color backgroundColor;
   final void Function(SavedNote)? onNotePressed;
@@ -91,7 +94,8 @@ class BookPlayerRenderer extends StatefulWidget {
   _BookRendererState createState() => _BookRendererState();
 }
 
-class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProviderStateMixin {
+class _BookRendererState extends State<BookPlayerRenderer>
+    with SingleTickerProviderStateMixin {
   late AnimationController animationController;
 
   // List<EpubRenderer> epubRenderers = [];
@@ -119,7 +123,7 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
       begin: 0,
       end: 1,
     );
-    final _animation = transitionTween.animate(
+    final animation = transitionTween.animate(
       CurvedAnimation(
         parent: animationController,
         curve: Curves.easeOut,
@@ -134,10 +138,10 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
 
     filesProvider = EpubServerFiles(widget.epubBook);
 
-    _animation.addListener(() {
-      progress.value = _animation.value;
+    animation.addListener(() {
+      progress.value = animation.value;
 
-      if (_animation.isCompleted) {
+      if (animation.isCompleted) {
         onDragAnimationEnd();
       }
     });
@@ -151,7 +155,8 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
         id: i,
         renderer: EpubRenderer(
           onNotePressed: (String noteId) {
-            widget.onNotePressed?.call(widget.savedNotes.firstWhere((savedNote) => savedNote.id == noteId));
+            widget.onNotePressed?.call(widget.savedNotes
+                .firstWhere((savedNote) => savedNote.id == noteId));
           },
           onLinkPressed: (String link) {
             if (isUrlRegex.hasMatch(link)) {
@@ -175,7 +180,7 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
             }
           },
           getPageFile: getPageFile,
-          onReadyChanged: (bool _isReady) {
+          onReadyChanged: (bool isReady) {
             onReadyChanged();
           },
           onSelection: widget.onSelection,
@@ -207,7 +212,10 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
     transitionTween.end = _clampProgress(prog.roundToDouble() + offset);
     // print("${transitionTween.begin} ${transitionTween.end}");
     animationController.duration = Duration(
-      milliseconds: (max((transitionTween.end! - transitionTween.begin!).abs(), 0.3) * 300).round(),
+      milliseconds:
+          (max((transitionTween.end! - transitionTween.begin!).abs(), 0.3) *
+                  300)
+              .round(),
     );
     animationController.forward();
   }
@@ -238,7 +246,8 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
       ));
     }
 
-    currentEpubRendererController = epubRenderers.firstWhere((renderer) => renderer.id == 1).controller;
+    currentEpubRendererController =
+        epubRenderers.firstWhere((renderer) => renderer.id == 1).controller;
 
     for (var renderer in epubRenderers) {
       renderer.controller.styleProperties = widget.initialStyle;
@@ -250,11 +259,13 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
   }
 
   void onReadyChanged() {
-    final allReady = canTransitionPages = epubRenderers.every((renderer) => renderer.controller.isReady);
+    final allReady = canTransitionPages =
+        epubRenderers.every((renderer) => renderer.controller.isReady);
 
     if (allReady) {
       if (widget.onSaveLocation != null) {
-        widget.onSaveLocation!(currentEpubRendererController.consistentLocation);
+        widget
+            .onSaveLocation!(currentEpubRendererController.consistentLocation);
       }
     }
 
@@ -274,9 +285,12 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
   void updatePages() {
     progress.value = progress.value.roundToDouble() % 3;
 
-    final currentEpubRenderer = epubRenderers.firstWhere((renderer) => renderer.id == (progress.value.round() + 1) % 3);
-    final rightRenderer = epubRenderers.firstWhere((renderer) => renderer.id == (progress.value.round() + 2) % 3);
-    final leftRenderer = epubRenderers.firstWhere((renderer) => renderer.id == (progress.value.round() + 3) % 3);
+    final currentEpubRenderer = epubRenderers.firstWhere(
+        (renderer) => renderer.id == (progress.value.round() + 1) % 3);
+    final rightRenderer = epubRenderers.firstWhere(
+        (renderer) => renderer.id == (progress.value.round() + 2) % 3);
+    final leftRenderer = epubRenderers.firstWhere(
+        (renderer) => renderer.id == (progress.value.round() + 3) % 3);
 
     // Layering
     setState(() {
@@ -310,8 +324,14 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
   double _clampProgress(double progress) {
     final location = currentEpubRendererController.location;
     return progress.clamp(
-      startDraggingProgress - (location.page == 0 && location.innerNav.page == 0 ? 0 : 1),
-      startDraggingProgress + (location.page == widget.maxPages - 1 && location.innerNav.page == currentEpubRendererController.innerPages! - 1 ? 0 : 1),
+      startDraggingProgress -
+          (location.page == 0 && location.innerNav.page == 0 ? 0 : 1),
+      startDraggingProgress +
+          (location.page == widget.maxPages - 1 &&
+                  location.innerNav.page ==
+                      currentEpubRendererController.innerPages! - 1
+              ? 0
+              : 1),
     );
   }
 
@@ -366,7 +386,8 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
             draggingMoved += details.delta;
             if (widget.dragAnimation == true) {
               double x = (-draggingMoved.dx / 392).clamp(-1, 1);
-              progress.value = _clampProgress(startDraggingProgress + (x.abs()) * x.sign);
+              progress.value =
+                  _clampProgress(startDraggingProgress + (x.abs()) * x.sign);
             }
           },
           onHorizontalDragEnd: (details) {
@@ -374,7 +395,8 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
               return;
             }
             dragging = false;
-            double offset = progress.value.roundToDouble() - startDraggingProgress;
+            double offset =
+                progress.value.roundToDouble() - startDraggingProgress;
             double side = (progress.value - startDraggingProgress).sign;
 
             if (details.velocity.pixelsPerSecond.dx.abs() > 30) {
@@ -417,7 +439,9 @@ class _BookRendererState extends State<BookPlayerRenderer> with SingleTickerProv
                               color: widget.backgroundColor,
                             ),
                             Opacity(
-                              opacity: location > 0 && location <= 1 ? max(0.1, value % 1) : 1,
+                              opacity: location > 0 && location <= 1
+                                  ? max(0.1, value % 1)
+                                  : 1,
                               child: child!,
                             ),
                           ],

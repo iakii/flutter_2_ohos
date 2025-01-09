@@ -26,7 +26,7 @@ void main() async {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -77,11 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
       themeMode: settingsManager?.config.themeMode ?? ThemeMode.system,
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
+      darkTheme: ThemeData.dark().copyWith(
+        //  brightness: Brightness.dark,
         primaryColor: darkScheme[0],
-        accentColor: darkScheme[1],
-        backgroundColor: Colors.black87,
         dialogBackgroundColor: darkScheme[0],
         scaffoldBackgroundColor: Colors.black87,
         tabBarTheme: TabBarTheme(
@@ -95,21 +93,20 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           unselectedLabelColor: Colors.white.withOpacity(0.5),
         ),
-        bottomAppBarColor: darkScheme[0],
         navigationBarTheme: NavigationBarThemeData(
           backgroundColor: darkScheme[0],
-          labelTextStyle: MaterialStateProperty.all(
+          labelTextStyle: WidgetStateProperty.all(
             const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
             backgroundColor: darkScheme[1],
             padding: const EdgeInsets.all(00),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
-            primary: Colors.white,
           ),
         ),
         appBarTheme: const AppBarTheme(
@@ -125,12 +122,14 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: darkScheme[0],
           foregroundColor: Colors.white,
         ),
+        colorScheme:
+            ColorScheme.fromSwatch().copyWith(secondary: darkScheme[1]),
+        // colorScheme: ColorScheme(background: Colors.black87),
+        bottomAppBarTheme: BottomAppBarTheme(color: darkScheme[0]),
       ),
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: lightScheme[0],
-        accentColor: lightScheme[1],
-        backgroundColor: Colors.white,
         dialogBackgroundColor: lightScheme[0],
         scaffoldBackgroundColor: Colors.white,
         tabBarTheme: TabBarTheme(
@@ -144,21 +143,20 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           unselectedLabelColor: Colors.black.withOpacity(0.5),
         ),
-        bottomAppBarColor: lightScheme[0],
         navigationBarTheme: NavigationBarThemeData(
           backgroundColor: lightScheme[0],
-          labelTextStyle: MaterialStateProperty.all(
+          labelTextStyle: WidgetStateProperty.all(
             const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
             backgroundColor: lightScheme[1],
             padding: const EdgeInsets.all(00),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
-            primary: Colors.white,
           ),
         ),
         appBarTheme: const AppBarTheme(
@@ -174,6 +172,10 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: lightScheme[0],
           foregroundColor: Colors.black,
         ),
+        colorScheme:
+            ColorScheme.fromSwatch().copyWith(secondary: lightScheme[1]),
+        // colorScheme: ColorScheme(background: Colors.white),
+        bottomAppBarTheme: BottomAppBarTheme(color: lightScheme[0]),
       ),
       debugShowCheckedModeBanner: false,
       home: ready
@@ -193,5 +195,6 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
   Set<PointerDeviceKind> get dragDevices => {
         PointerDeviceKind.touch,
         PointerDeviceKind.mouse,
+        PointerDeviceKind.trackpad,
       };
 }

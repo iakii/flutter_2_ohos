@@ -26,15 +26,14 @@ final _sortTypeStrings = {
 
 class BooksViewer extends StatefulWidget {
   const BooksViewer({
-    Key? key,
+    super.key,
     required this.books,
     this.books3dData,
     bool? canSort,
     this.onPressBook,
     this.onLongPressBook,
     this.settingsManager,
-  })  : canSort = canSort ?? true,
-        super(key: key);
+  }) : canSort = canSort ?? true;
 
   final List<Book> books;
   final Map<Book, Book3DData>? books3dData;

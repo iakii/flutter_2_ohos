@@ -5,13 +5,13 @@ import 'book_3d.dart';
 
 class Book3dInteractive extends StatefulWidget {
   const Book3dInteractive({
-    Key? key,
+    super.key,
     this.pageDepth = 2.0,
     required this.book3dData,
     this.onRotationChanged,
     this.borderRadius,
     this.spreadRadius,
-  }) : super(key: key);
+  });
 
   final Book3DData book3dData;
   final void Function(double)? onRotationChanged;

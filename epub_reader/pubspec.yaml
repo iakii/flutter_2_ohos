@@ -6,7 +6,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.19.6 <3.0.0"
+  sdk: ">=3.4.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -14,15 +14,18 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   after_layout: ^1.1.0
-  collection: ^1.15.0
-  epubz:
-    #  path: ../dart-epubz
-    git:
-      url: https://github.com/FlafyDev/dart-epubz.git
-      ref: dev
-  http: ^0.13.4
+  collection: ^1.18.0
+  epubx:
+    path: ../../flutter_plugins/packages/epubx
+
+  # epubz:
+  #   #  path: ../dart-epubz
+  #   git:
+  #     url: https://github.com/FlafyDev/dart-epubz.git
+  #     ref: dev
+  http: ^1.2.2
   palette_generator: ^0.3.3
-  scroll_snap_list: ^0.8.6
+  scroll_snap_list: ^0.9.1
   # googleapis: ^9.1.0
   responsive_grid_list: ^1.2.4
   html: ^0.15.0
@@ -31,14 +34,14 @@ dependencies:
     git:
       url: https://gitee.com/openharmony-sig/flutter_packages.git
       path: packages/path_provider/path_provider
-  uuid: ^3.0.6
+  uuid: ^4.5.1
   # permission_handler:
   #   git:
   #     url: https://gitee.com/openharmony-sig/flutter_permission_handler.git
   #     path: permission_handler
-  separated_column: ^2.0.0
+  separated_column: ^3.0.3
   # google_mlkit_translation: ^0.3.0
-  mime: ^1.0.2
+  mime: ^2.0.0
   url_launcher:
     git:
       url: https://gitee.com/openharmony-sig/flutter_packages.git
@@ -49,9 +52,15 @@ dependencies:
       url: https://gitee.com/openharmony-sig/flutter_inappwebview.git
       path: flutter_inappwebview
       rerf: master
-  flutter_markdown: ^0.6.10
+  flutter_inappwebview_ohos:
+    git:
+      url: https://gitee.com/openharmony-sig/flutter_inappwebview.git
+      path: flutter_inappwebview_ohos
+      rerf: master
+  # flutter_inappwebview_windows: 0.6.0
+  flutter_markdown: ^0.7.5
   bottom_inset_observer: ^3.0.1
-  scrollable_positioned_list: ^0.2.3
+  scrollable_positioned_list: ^0.3.8
   flutter_rating_bar: ^4.0.1
   equatable: ^2.0.3
   stack: ^0.2.1
@@ -62,16 +71,17 @@ dependencies:
       ref: master
   flutter_phoenix: ^1.0.0
   archive: ^3.3.1
-  flutter_file_dialog: ^2.3.0
+  flutter_file_dialog: ^3.0.2
   font_awesome_flutter: ^10.1.0
   string_similarity: ^2.0.0
   shake: ^2.1.0
+  image: ^3.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^1.0.0
+  flutter_lints: ^4.0.0
 
 dependency_overrides:
   path_provider:

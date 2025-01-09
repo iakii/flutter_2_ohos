@@ -16,5 +16,5 @@
   "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
   "editor.hover.enabled": true,
   "cSpell.enabled": true,
-  "dart.flutterSdkPath": "C:\\Users\\Kai\\.flutter_sdk\\ohos_flutter"
+  "dart.flutterSdkPath": "C:\\Users\\Kai\\.flutter_sdk\\ohos_flutter_3.22"
 }

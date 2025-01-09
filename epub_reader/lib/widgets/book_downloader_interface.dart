@@ -20,7 +20,8 @@ enum Stage {
 
 class BookDownloaderInterfaceGetter {}
 
-class BookDownloaderInterfaceDownloader implements BookDownloaderInterfaceGetter {
+class BookDownloaderInterfaceDownloader
+    implements BookDownloaderInterfaceGetter {
   final BookIdentifier bookIdentifier;
   final BookDownloader bookDownloader;
 
@@ -40,12 +41,12 @@ class BookDownloaderInterfaceBytes implements BookDownloaderInterfaceGetter {
 
 class BookDownloaderInterface extends StatefulWidget {
   const BookDownloaderInterface({
-    Key? key,
+    super.key,
     this.description,
     required this.getter,
     required this.booksDirectory,
     this.onDone,
-  }) : super(key: key);
+  });
 
   final String? description;
   final BookDownloaderInterfaceGetter getter;
@@ -53,7 +54,9 @@ class BookDownloaderInterface extends StatefulWidget {
   final void Function()? onDone;
 
   @override
-  _BookDownloaderInterfaceState createState() => _BookDownloaderInterfaceState();
+  // ignore: library_private_types_in_public_api
+  _BookDownloaderInterfaceState createState() =>
+      _BookDownloaderInterfaceState();
 }
 
 class _BookDownloaderInterfaceState extends State<BookDownloaderInterface> {
@@ -68,10 +71,12 @@ class _BookDownloaderInterfaceState extends State<BookDownloaderInterface> {
     begin();
   }
 
-  Future<List<int>?> downloadEpub(BookDownloaderInterfaceDownloader getter) async {
+  Future<List<int>?> downloadEpub(
+      BookDownloaderInterfaceDownloader getter) async {
     // final completer = Completer<List<int>?>();
 
-    final uri = (await getter.bookDownloader.getEpubDownload(getter.bookIdentifier));
+    final uri =
+        (await getter.bookDownloader.getEpubDownload(getter.bookIdentifier));
 
     if (uri == null) {
       return null;
@@ -115,7 +120,8 @@ class _BookDownloaderInterfaceState extends State<BookDownloaderInterface> {
     if (widget.getter is BookDownloaderInterfaceDownloader) {
       // epubBytes =
       //     (await rootBundle.load("assets/sample.epub")).buffer.asInt8List();
-      epubBytes = await downloadEpub(widget.getter as BookDownloaderInterfaceDownloader);
+      epubBytes = await downloadEpub(
+          widget.getter as BookDownloaderInterfaceDownloader);
     } else if (widget.getter is BookDownloaderInterfaceBytes) {
       epubBytes = (widget.getter as BookDownloaderInterfaceBytes).bookFileBytes;
     }
@@ -127,7 +133,8 @@ class _BookDownloaderInterfaceState extends State<BookDownloaderInterface> {
       return;
     }
 
-    await File("${widget.booksDirectory.path}/test.epub").writeAsBytes(epubBytes);
+    await File("${widget.booksDirectory.path}/test.epub")
+        .writeAsBytes(epubBytes);
 
     setState(() {
       stage = Stage.processing;

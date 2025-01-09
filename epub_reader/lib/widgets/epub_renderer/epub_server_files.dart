@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'dart:typed_data';
-import 'package:epubz/epubz.dart';
+import 'package:epubx/epubx.dart';
 import 'package:flutter/services.dart';
 
 class EpubServerFiles {

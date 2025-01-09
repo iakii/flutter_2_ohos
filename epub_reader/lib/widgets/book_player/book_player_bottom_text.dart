@@ -13,11 +13,11 @@ class BookPlayerBottomText extends StatelessWidget {
   final double wordsPerPage;
 
   const BookPlayerBottomText({
-    Key? key,
+    super.key,
     required this.type,
     required this.bookSavedData,
     required this.wordsPerPage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

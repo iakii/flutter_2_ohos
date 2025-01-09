@@ -1,13 +1,15 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:epub_reader/utils/get_files_from_epub_spine.dart';
 import 'package:epub_reader/widgets/epub_renderer/epub_location.dart';
-import 'package:epubz/epubz.dart';
+import 'package:epubx/epubx.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart';
+
 import '../utils/link_spine_file_to_chapter.dart';
-import '../widgets/clean_app_bar.dart';
 
 class SearchResults {
   final EpubLocation<int, EpubInnerTextNode> location;
@@ -21,15 +23,16 @@ class SearchResults {
 
 class BookPlayerSearch extends StatefulWidget {
   const BookPlayerSearch({
-    Key? key,
+    super.key,
     required this.epubBook,
     this.initialText,
-  }) : super(key: key);
+  });
 
   final String? initialText;
   final EpubBook epubBook;
 
   @override
+  // ignore: library_private_types_in_public_api
   _BookPlayerSearchState createState() => _BookPlayerSearchState();
 }
 
@@ -121,14 +124,18 @@ class _BookPlayerSearchState extends State<BookPlayerSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CleanAppBar(
-        title: 'Search',
-      ),
+      // appBar: const CleanAppBar(
+      //   title: 'Search',
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             TextFormField(
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                hintText: "Search",
+              ),
               controller: textEditingController,
               onFieldSubmitted: (String value) {
                 setState(() {
@@ -166,7 +173,7 @@ class _BookPlayerSearchState extends State<BookPlayerSearch> {
                     return Text("${snapshot.error}");
                   } else {
                     return const Center(
-                      child: CircularProgressIndicator(),
+                      child: CupertinoActivityIndicator(),
                     );
                   }
                 },

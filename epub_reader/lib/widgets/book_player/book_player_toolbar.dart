@@ -11,14 +11,14 @@ enum _ToolBarViews {
 
 class BookPlayerToolbar extends StatefulWidget {
   const BookPlayerToolbar({
-    Key? key,
+    super.key,
     this.text,
     required this.onCopy,
     required this.onAddNote,
     required this.onSearch,
     required this.onCharacter,
     required this.onWebSearch,
-  }) : super(key: key);
+  });
 
   final String? text;
   final void Function() onCopy;
@@ -93,11 +93,10 @@ class _BookPlayerToolbarState extends State<BookPlayerToolbar> {
 
 class _ToolBarButton extends StatelessWidget {
   const _ToolBarButton({
-    Key? key,
     required this.icon,
     required this.onPressed,
     required this.size,
-  }) : super(key: key);
+  });
 
   final Icon icon;
   final void Function() onPressed;

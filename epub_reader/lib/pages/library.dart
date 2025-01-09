@@ -18,7 +18,7 @@ class CustomPageRoute extends MaterialPageRoute {
 
 class Library extends StatefulWidget {
   const Library({
-    Key? key,
+    super.key,
     required this.books,
     required this.shelves,
     required this.onCreateShelf,
@@ -27,7 +27,7 @@ class Library extends StatefulWidget {
     required this.onDeleteBook,
     required this.onImageChanged,
     required this.settingsManager,
-  }) : super(key: key);
+  });
 
   final List<Book> books;
   final List<Shelf> shelves;

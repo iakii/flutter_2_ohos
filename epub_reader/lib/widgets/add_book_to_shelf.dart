@@ -6,11 +6,11 @@ import '../models/book.dart';
 
 class AddBookToShelf extends StatefulWidget {
   const AddBookToShelf({
-    Key? key,
+    super.key,
     required this.shelves,
     required this.book,
     required this.onChange,
-  }) : super(key: key);
+  });
 
   final List<Shelf> shelves;
   final Book book;

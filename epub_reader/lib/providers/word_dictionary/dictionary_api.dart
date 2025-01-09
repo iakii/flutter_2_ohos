@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:epub_reader/models/word_definition.dart';
-import 'package:http/http.dart';
+
 import 'word_dictionary.dart';
 
 class DictionaryApi extends WordDictionary {
-  DictionaryApi({required Client httpClient}) : super(httpClient: httpClient);
+  DictionaryApi({required super.httpClient});
 
   @override
   Future<List<WordDefinition>> getDefinition(String word) async {

@@ -5,11 +5,11 @@ import '../widgets/clean_app_bar.dart';
 
 class BookPlayerNotesViewer extends StatelessWidget {
   const BookPlayerNotesViewer({
-    Key? key,
+    super.key,
     required this.notes,
     required this.onPressNote,
     this.onDeleteNote,
-  }) : super(key: key);
+  });
 
   final List<SavedNote> notes;
   final void Function(SavedNote) onPressNote;

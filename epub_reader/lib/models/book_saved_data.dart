@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:epub_reader/widgets/epub_renderer/epub_location.dart';
-import 'package:epubz/epubz.dart';
+import 'package:epubx/epubx.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:html/parser.dart';
+import 'package:image/image.dart' as img;
 import 'package:palette_generator/palette_generator.dart';
 import 'package:path/path.dart' as p;
-import 'package:image/image.dart' as img;
-import 'package:flutter/material.dart';
+
 import '../providers/character_metadata/character_metadata.dart';
 import '../utils/get_files_from_epub_spine.dart';
 import '../utils/hex_color.dart';
@@ -239,7 +241,6 @@ class BookSavedData {
 
     if (epubBook.CoverImage == null) {
       final data = await rootBundle.load("assets/images/cover.png");
-
       coverImageData = img.decodeImage(data.buffer.asUint8List())!;
     } else {
       coverImageData = epubBook.CoverImage!;
@@ -288,7 +289,7 @@ class BookSavedData {
           align: 'left',
           fontFamily: 'Default',
           fontPath: '',
-          theme: EpubStyleThemes.dark,
+          theme: EpubStyleThemes.light,
         ),
         progressSpine: 0,
         rating: null,

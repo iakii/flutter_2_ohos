@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class CleanAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CleanAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.canBack = true,
     this.onBackPressed,
     this.actions,
     this.color,
-  }) : super(key: key);
+  });
 
   final String title;
   final bool canBack;
@@ -21,7 +21,7 @@ class CleanAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       centerTitle: true,
       elevation: 0,
-      backgroundColor: color ?? Theme.of(context).backgroundColor,
+      backgroundColor: color ?? Theme.of(context).colorScheme.surface,
       leading: canBack
           ? IconButton(
               splashRadius: 20,

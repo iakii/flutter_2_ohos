@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class SettingsEnumDropdown<T> extends StatelessWidget {
   const SettingsEnumDropdown({
-    Key? key,
+    super.key,
     required this.settingName,
     required this.dropdownItems,
     required this.value,
     required this.onChange,
-  }) : super(key: key);
+  });
 
   final String settingName;
   final List<DropdownMenuItem<T>> dropdownItems;

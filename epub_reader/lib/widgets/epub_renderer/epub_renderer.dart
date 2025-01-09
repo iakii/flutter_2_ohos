@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:epub_reader/models/book_saved_data.dart';
 import 'package:epub_reader/utils/enum_from_index.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -113,7 +114,8 @@ class EpubStyleProperties {
 }
 
 class EpubRendererController {
-  final void Function(EpubLocation<int, EpubInnerNavigation>, bool forced, List<SavedNote> Function(int page)?) setLocation;
+  final void Function(EpubLocation<int, EpubInnerNavigation>, bool forced,
+      List<SavedNote> Function(int page)?) setLocation;
   final EpubLocation<int, EpubInnerPage> Function() getLocation;
   final void Function(EpubStyleProperties) _updateStyle;
   final void Function(String) _updateCss;
@@ -135,7 +137,8 @@ class EpubRendererController {
     fontPath: '',
     theme: EpubStyleThemes.dark,
   );
-  EpubLocation<int, EpubConsistentInnerNavigation> consistentLocation = EpubLocation(
+  EpubLocation<int, EpubConsistentInnerNavigation> consistentLocation =
+      EpubLocation(
     0,
     EpubInnerAnchor(""),
   );
@@ -145,7 +148,9 @@ class EpubRendererController {
   List<String> passedAnchors = [];
 
   EpubRendererController({
-    required void Function(EpubLocation<int, EpubInnerNavigation>, bool forced, List<SavedNote> Function(int page)?) onLocation,
+    required void Function(EpubLocation<int, EpubInnerNavigation>, bool forced,
+            List<SavedNote> Function(int page)?)
+        onLocation,
     required this.getLocation,
     required void Function(EpubStyleProperties) onStyle,
     required void Function(String) onCss,
@@ -170,7 +175,7 @@ class EpubRendererController {
 
 class EpubRenderer extends StatefulWidget {
   const EpubRenderer({
-    Key? key,
+    super.key,
     required this.getPageFile,
     required this.onLoaded,
     required this.onReadyChanged,
@@ -178,7 +183,7 @@ class EpubRenderer extends StatefulWidget {
     required this.maxPages,
     required this.onLinkPressed,
     required this.onNotePressed,
-  }) : super(key: key);
+  });
 
   final String Function(int) getPageFile;
   final void Function(EpubRendererController) onLoaded;
@@ -222,7 +227,12 @@ class _EpubRendererState extends State<EpubRenderer> {
     List<Map<String, Object>> notesToJson(int page) {
       return (getNotes?.call(page) ?? [])
           .map(
-            (note) => {"id": note.id, "ranges": note.rangesData.map((range) => range.toJson()).toList(), "color": note.color.index, "hasDescription": note.description.isNotEmpty},
+            (note) => {
+              "id": note.id,
+              "ranges": note.rangesData.map((range) => range.toJson()).toList(),
+              "color": note.color.index,
+              "hasDescription": note.description.isNotEmpty
+            },
           )
           .toList();
     }
@@ -230,7 +240,8 @@ class _EpubRendererState extends State<EpubRenderer> {
     if (newLocation.innerNav is EpubInnerPage) {
       var page = newLocation.page;
       var innerPage = (newLocation.innerNav as EpubInnerPage).page;
-      if (controller.innerPages != null && innerPage >= controller.innerPages!) {
+      if (controller.innerPages != null &&
+          innerPage >= controller.innerPages!) {
         page++;
         innerPage = 0;
         controller.innerPages = null;
@@ -333,14 +344,16 @@ class _EpubRendererState extends State<EpubRenderer> {
       EpubInnerPage(args[0] as int),
     );
     controller.innerPages = args[1] as int;
-    controller.passedAnchors = (args[2] as List<dynamic>).map((e) => e.toString()).toList();
+    controller.passedAnchors =
+        (args[2] as List<dynamic>).map((e) => e.toString()).toList();
     // print("SET PASSED: ${controller.passedAnchors} ${controller.innerPages}");
 
     final consistentInnerNavigationJson = args[3] as Map<String, dynamic>;
 
     controller.consistentLocation = EpubLocation(
       currentLocation.page,
-      EpubInnerNavigation.fromJson(consistentInnerNavigationJson) as EpubConsistentInnerNavigation,
+      EpubInnerNavigation.fromJson(consistentInnerNavigationJson)
+          as EpubConsistentInnerNavigation,
     );
 
     isReady = true;
@@ -355,7 +368,7 @@ class _EpubRendererState extends State<EpubRenderer> {
 
   @override
   Widget build(BuildContext context) {
-    print("isReady==$isReady");
+    // print("isReady==$isReady");
     return Stack(
       children: [
         Opacity(
@@ -415,7 +428,8 @@ class _EpubRendererState extends State<EpubRenderer> {
                       text: args[0] as String,
                       rangesData: (args[1] as List)
                           .map(
-                            (rangeDataJson) => SavedNoteRangeData.fromJson(rangeDataJson),
+                            (rangeDataJson) =>
+                                SavedNoteRangeData.fromJson(rangeDataJson),
                           )
                           .toList(),
                       rect: Rectangle(
@@ -429,7 +443,8 @@ class _EpubRendererState extends State<EpubRenderer> {
                 },
               );
 
-              controller.loadUrl(urlRequest: URLRequest(url: WebUri("http://localhost:8080")));
+              controller.loadUrl(
+                  urlRequest: URLRequest(url: WebUri("http://localhost:8080")));
 
               // controller.loadUrl(
               //   urlRequest: URLRequest(
@@ -440,7 +455,8 @@ class _EpubRendererState extends State<EpubRenderer> {
             },
           ),
         ),
-        if (!isReady) const Center(child: CircularProgressIndicator()),
+        if (!isReady)
+          const Center(child: CupertinoActivityIndicator(color: Colors.white)),
       ],
     );
   }

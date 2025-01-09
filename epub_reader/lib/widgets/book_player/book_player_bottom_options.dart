@@ -42,7 +42,7 @@ import '../../models/book.dart';
 
 class BookPlayerBottomOptions extends StatefulWidget {
   const BookPlayerBottomOptions({
-    Key? key,
+    super.key,
     required this.page,
     required this.pages,
     required this.book,
@@ -54,7 +54,7 @@ class BookPlayerBottomOptions extends StatefulWidget {
     required this.onLocationBack,
     required this.onSearch,
     required this.locationBackEnabled,
-  }) : super(key: key);
+  });
 
   final int page;
   final int pages;
@@ -69,6 +69,7 @@ class BookPlayerBottomOptions extends StatefulWidget {
   final bool locationBackEnabled;
 
   @override
+  // ignore: library_private_types_in_public_api
   _BookPlayerBottomOptionsState createState() =>
       _BookPlayerBottomOptionsState();
 }
@@ -77,7 +78,7 @@ class _BookPlayerBottomOptionsState extends State<BookPlayerBottomOptions> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 8 + 20, left: 20),
+      padding: const EdgeInsets.only(right: 16, left: 16),
       child: Row(
         children: [
           Material(
@@ -87,7 +88,7 @@ class _BookPlayerBottomOptionsState extends State<BookPlayerBottomOptions> {
               icon: Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.rotationY(pi),
-                child: const Icon(Icons.exit_to_app),
+                child: const Icon(Icons.logout_rounded),
               ),
               onPressed: widget.onExit,
             ),
@@ -96,7 +97,7 @@ class _BookPlayerBottomOptionsState extends State<BookPlayerBottomOptions> {
             color: Colors.transparent,
             child: IconButton(
               splashRadius: 20,
-              icon: const Icon(Icons.list),
+              icon: const Icon(Icons.menu_open_rounded),
               onPressed: widget.onChaptersViewPressed,
             ),
           ),
@@ -104,7 +105,7 @@ class _BookPlayerBottomOptionsState extends State<BookPlayerBottomOptions> {
             color: Colors.transparent,
             child: IconButton(
               splashRadius: 20,
-              icon: const Icon(Icons.notes),
+              icon: const Icon(Icons.book_outlined, size: 20),
               onPressed: widget.onNotesPressed,
             ),
           ),
@@ -120,7 +121,7 @@ class _BookPlayerBottomOptionsState extends State<BookPlayerBottomOptions> {
             color: Colors.transparent,
             child: IconButton(
               splashRadius: 20,
-              icon: const Icon(Icons.search),
+              icon: const Icon(Icons.search_rounded),
               onPressed: widget.onSearch,
             ),
           ),
@@ -128,7 +129,7 @@ class _BookPlayerBottomOptionsState extends State<BookPlayerBottomOptions> {
             color: Colors.transparent,
             child: IconButton(
               splashRadius: 20,
-              icon: const Icon(Icons.settings_backup_restore_outlined),
+              icon: const Icon(Icons.reply_rounded),
               onPressed:
                   widget.locationBackEnabled ? widget.onLocationBack : null,
             ),
@@ -136,7 +137,7 @@ class _BookPlayerBottomOptionsState extends State<BookPlayerBottomOptions> {
           Expanded(
             child: Text(
               "${widget.page} / ${widget.pages}",
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodySmall,
               textAlign: TextAlign.center,
             ),
           ),

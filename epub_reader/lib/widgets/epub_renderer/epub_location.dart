@@ -1,5 +1,5 @@
 // Where in the book you currently are.
-import 'package:epubz/epubz.dart';
+import 'package:epubx/epubx.dart';
 import 'package:equatable/equatable.dart';
 
 class EpubLocation<PageType, Nav extends EpubInnerNavigation>

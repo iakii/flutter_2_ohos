@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:collection/collection.dart';
-import 'package:epubz/epubz.dart';
+import 'package:epubx/epubx.dart';
 
 import 'get_all_sub_epub_chapters.dart';
 import 'get_files_from_epub_spine.dart';

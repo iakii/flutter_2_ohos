@@ -4,10 +4,10 @@ import '../models/book_saved_data.dart';
 
 class BookPlayerNoteEditor extends StatefulWidget {
   const BookPlayerNoteEditor({
-    Key? key,
+    super.key,
     required this.note,
     required this.onDelete,
-  }) : super(key: key);
+  });
 
   final SavedNote note;
   final void Function() onDelete;

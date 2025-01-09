@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:epub_reader/pages/home_settings.dart';
 import 'package:epub_reader/providers/book_downloader/book_downloader.dart';
 import 'package:file_picker_ohos/file_picker_ohos.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:http/http.dart';
@@ -17,7 +18,7 @@ import 'library.dart';
 import 'search.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key, required this.settingsManager}) : super(key: key);
+  const Home({super.key, required this.settingsManager});
 
   final SettingsManager settingsManager;
 
@@ -98,7 +99,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     builder: (context) => BookPlayer(
                       initialStyle: book.savedData!.data.styleProperties,
                       book: book,
-                      wordDictionaryEnum: widget.settingsManager.config.wordDictionary,
+                      wordDictionaryEnum:
+                          widget.settingsManager.config.wordDictionary,
                       bookOptions: BookOptions(
                         BookThemeData(
                           backgroundColor: Colors.white,
@@ -113,7 +115,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               },
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CupertinoActivityIndicator());
           }
         },
       ),
@@ -121,7 +123,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         settingsManager: widget.settingsManager,
         bookMetadataEnum: widget.settingsManager.config.bookMetadata,
         onBookDownload: (book) async {
-          final bookDownloader = await createBookDownloader(widget.settingsManager.config.bookDownloader);
+          final bookDownloader = await createBookDownloader(
+              widget.settingsManager.config.bookDownloader);
           if (bookDownloader == null) {
             messagePopup(
               context,
@@ -168,6 +171,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               final files = (await FilePicker.platform.pickFiles(
                 type: FileType.custom,
                 allowedExtensions: ['epub'],
+                allowMultiple: true,
               ))
                   ?.files;
 

@@ -80,7 +80,7 @@ class Book3DData {
 
 class Book3D extends StatefulWidget {
   const Book3D({
-    Key? key,
+    super.key,
     required this.book3dData,
     double rotateY = 0.0,
     this.pageDepth = 4.0,
@@ -89,8 +89,7 @@ class Book3D extends StatefulWidget {
     this.borderRadius,
   })  : rotateY = rotateY % (pi * 2),
         coverOpenRotate = coverOpenRotate % (pi * 2),
-        assert(!(coverOpenRotate != 0 && rotateY != 0)),
-        super(key: key);
+        assert(!(coverOpenRotate != 0 && rotateY != 0));
 
   final Book3DData book3dData;
   final double rotateY;

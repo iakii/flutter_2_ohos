@@ -3,10 +3,10 @@ import '../epub_renderer/epub_renderer.dart';
 
 class BookPlayerCustomizer extends StatefulWidget {
   const BookPlayerCustomizer({
-    Key? key,
+    super.key,
     required this.styleProperties,
     required this.onUpdateStyle,
-  }) : super(key: key);
+  });
 
   final EpubStyleProperties styleProperties;
   final void Function() onUpdateStyle;
@@ -30,10 +30,10 @@ class _BookPlayerCustomizerState extends State<BookPlayerCustomizer> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      decoration: BoxDecoration(
-        color: theme.primaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(15)),
-      ),
+      decoration: const BoxDecoration(
+          // color: theme.primaryColor,
+          // borderRadius: const BorderRadius.all(Radius.circular(15)),
+          ),
       child: PageView(
         children: [
           Padding(
@@ -119,7 +119,7 @@ class _BookPlayerCustomizerState extends State<BookPlayerCustomizer> {
                   value: fonts.contains(widget.styleProperties.fontFamily)
                       ? widget.styleProperties.fontFamily
                       : fonts.first,
-                  dropdownColor: theme.backgroundColor,
+                  dropdownColor: theme.colorScheme.surface,
                   onChanged: (String? newFont) {
                     if (newFont == null) {
                       return;
@@ -138,7 +138,7 @@ class _BookPlayerCustomizerState extends State<BookPlayerCustomizer> {
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           value,
-                          style: theme.textTheme.bodyText2,
+                          style: theme.textTheme.bodyMedium,
                         ),
                       ),
                     );
@@ -226,20 +226,20 @@ class _BookPlayerCustomizerState extends State<BookPlayerCustomizer> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _ScalerButton(
-                      child: Container(),
                       backgroundColor: Colors.white,
                       onPressed: () {
                         widget.styleProperties.theme = EpubStyleThemes.light;
                         widget.onUpdateStyle();
                       },
+                      child: Container(),
                     ),
                     _ScalerButton(
-                      child: Container(),
                       backgroundColor: Colors.black,
                       onPressed: () {
                         widget.styleProperties.theme = EpubStyleThemes.dark;
                         widget.onUpdateStyle();
                       },
+                      child: Container(),
                     ),
                   ],
                 )
@@ -254,13 +254,12 @@ class _BookPlayerCustomizerState extends State<BookPlayerCustomizer> {
 
 class _Scaler extends StatelessWidget {
   const _Scaler({
-    Key? key,
     required this.valueDisplay,
     required this.decrease,
     required this.increase,
     required this.onDecrease,
     required this.onIncrease,
-  }) : super(key: key);
+  });
 
   final String valueDisplay;
   final Widget decrease;
@@ -274,20 +273,20 @@ class _Scaler extends StatelessWidget {
       children: [
         Expanded(
           child: _ScalerButton(
-            child: decrease,
             onPressed: onDecrease,
+            child: decrease,
           ),
         ),
         Expanded(
           child: Center(
             child: Text(valueDisplay,
-                style: Theme.of(context).textTheme.bodyText2),
+                style: Theme.of(context).textTheme.bodyMedium),
           ),
         ),
         Expanded(
           child: _ScalerButton(
-            child: increase,
             onPressed: onIncrease,
+            child: increase,
           ),
         ),
       ],
@@ -297,11 +296,10 @@ class _Scaler extends StatelessWidget {
 
 class _ScalerButton extends StatelessWidget {
   const _ScalerButton({
-    Key? key,
     required this.child,
     required this.onPressed,
     this.backgroundColor,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final void Function() onPressed;
@@ -317,10 +315,10 @@ class _ScalerButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(
+          backgroundColor: WidgetStateProperty.all<Color>(
             backgroundColor ?? Theme.of(context).dialogBackgroundColor,
           ),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
               side: BorderSide(
@@ -337,12 +335,11 @@ class _ScalerButton extends StatelessWidget {
 
 class _AlignmentButton extends StatelessWidget {
   const _AlignmentButton({
-    Key? key,
     required this.icon,
     required this.alignment,
     required this.style,
     required this.updateStyle,
-  }) : super(key: key);
+  });
 
   final IconData icon;
   final String alignment;

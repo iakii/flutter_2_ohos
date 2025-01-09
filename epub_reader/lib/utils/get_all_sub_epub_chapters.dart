@@ -1,4 +1,4 @@
-import 'package:epubz/epubz.dart';
+import 'package:epubx/epubx.dart';
 
 List<EpubChapter> getAllSubEpubChapters(EpubChapter chapter) {
   final List<EpubChapter> chapters = [];

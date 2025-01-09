@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // import 'package:google_mlkit_translation/google_mlkit_translation.dart';
@@ -7,12 +8,12 @@ import '../../providers/word_dictionary/word_dictionary.dart';
 
 class BookPlayerWordInfo extends StatefulWidget {
   const BookPlayerWordInfo({
-    Key? key,
+    super.key,
     required this.word,
     this.wordDictionary,
     this.onClose,
     this.onFocusChange,
-  }) : super(key: key);
+  });
 
   final String word;
   final WordDictionary? wordDictionary;
@@ -28,7 +29,8 @@ class BookPlayerWordInfo extends StatefulWidget {
   State<BookPlayerWordInfo> createState() => _BookPlayerWordInfoState();
 }
 
-class _BookPlayerWordInfoState extends State<BookPlayerWordInfo> with SingleTickerProviderStateMixin {
+class _BookPlayerWordInfoState extends State<BookPlayerWordInfo>
+    with SingleTickerProviderStateMixin {
   late TabController tabController;
   late String inputWord;
   late String previousWord;
@@ -69,6 +71,7 @@ class _BookPlayerWordInfoState extends State<BookPlayerWordInfo> with SingleTick
               children: [
                 Expanded(
                   child: Focus(
+                    onFocusChange: widget.onFocusChange,
                     child: TextFormField(
                       controller: textEditingController,
                       onFieldSubmitted: (String value) {
@@ -76,9 +79,8 @@ class _BookPlayerWordInfoState extends State<BookPlayerWordInfo> with SingleTick
                           inputWord = value;
                         });
                       },
-                      style: Theme.of(context).textTheme.headline6,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    onFocusChange: widget.onFocusChange,
                   ),
                 ),
                 if (widget.onClose != null)
@@ -110,16 +112,18 @@ class _BookPlayerWordInfoState extends State<BookPlayerWordInfo> with SingleTick
                       future: widget.wordDictionary!.getDefinition(inputWord),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          final wordDefinitions = snapshot.data as List<WordDefinition>;
-                          return _WordDefinitionDisplay(wordDefinition: wordDefinitions.first);
+                          final wordDefinitions =
+                              snapshot.data as List<WordDefinition>;
+                          return _WordDefinitionDisplay(
+                              wordDefinition: wordDefinitions.first);
                         } else if (snapshot.hasError) {
                           return Text(
                             "Error: ${snapshot.error}",
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.titleLarge,
                           );
                         } else {
                           return const Center(
-                            child: CircularProgressIndicator(),
+                            child: CupertinoActivityIndicator(),
                           );
                         }
                       },
@@ -134,9 +138,8 @@ class _BookPlayerWordInfoState extends State<BookPlayerWordInfo> with SingleTick
 
 class _WordDefinitionDisplay extends StatelessWidget {
   const _WordDefinitionDisplay({
-    Key? key,
     required this.wordDefinition,
-  }) : super(key: key);
+  });
 
   final WordDefinition wordDefinition;
 
@@ -156,7 +159,8 @@ class _WordDefinitionDisplay extends StatelessWidget {
             children: [
               SizedBox(
                 width: double.infinity,
-                child: Text(meaning.partOfSpeech, style: Theme.of(context).textTheme.bodyLarge!),
+                child: Text(meaning.partOfSpeech,
+                    style: Theme.of(context).textTheme.bodyLarge!),
               ),
               ...meaning.definitions.asMap().entries.map(
                     (entry) => Row(

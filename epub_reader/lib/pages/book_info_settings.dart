@@ -10,12 +10,12 @@ import '../widgets/settings_enum_dropdown.dart';
 
 class BookInfoSettings extends StatefulWidget {
   const BookInfoSettings({
-    Key? key,
+    super.key,
     required this.book,
     required this.onImageChanged,
     required this.onDelete,
     required this.characterMetadataNames,
-  }) : super(key: key);
+  });
 
   final Book book;
   final void Function() onDelete;
@@ -35,7 +35,7 @@ class _BookInfoSettingsState extends State<BookInfoSettings> {
         title: 'Settings for ${widget.book.name}',
       ),
       body: Container(
-        color: Theme.of(context).backgroundColor,
+        color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -69,14 +69,10 @@ class _BookInfoSettingsState extends State<BookInfoSettings> {
                       child: Column(
                         children: [
                           TextButton(
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                "Set a new cover",
-                              ),
-                            ),
                             onPressed: () async {
-                              final files = (await FilePicker.platform.pickFiles(type: FileType.image))?.files;
+                              final files = (await FilePicker.platform
+                                      .pickFiles(type: FileType.image))
+                                  ?.files;
 
                               if (files?.isEmpty ?? true) {
                                 return;
@@ -87,7 +83,14 @@ class _BookInfoSettingsState extends State<BookInfoSettings> {
                               widget.onImageChanged(imageFile);
                             },
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all(Colors.white),
+                              foregroundColor:
+                                  WidgetStateProperty.all(Colors.white),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "Set a new cover",
+                              ),
                             ),
                           )
                         ],
@@ -118,7 +121,8 @@ class _BookInfoSettingsState extends State<BookInfoSettings> {
                   widget.book.savedData!.saveData();
                 },
               ),
-              if (widget.book.savedData!.data.characterMetadata == CharacterMetadataEnum.local)
+              if (widget.book.savedData!.data.characterMetadata ==
+                  CharacterMetadataEnum.local)
                 SettingsEnumDropdown(
                   settingName: "List of local characters",
                   dropdownItems: widget.characterMetadataNames
@@ -139,7 +143,10 @@ class _BookInfoSettingsState extends State<BookInfoSettings> {
                     });
                     widget.book.savedData!.saveData();
                   },
-                  value: widget.characterMetadataNames.contains(widget.book.savedData!.data.characterMetadataName) ? widget.book.savedData!.data.characterMetadataName : null,
+                  value: widget.characterMetadataNames.contains(
+                          widget.book.savedData!.data.characterMetadataName)
+                      ? widget.book.savedData!.data.characterMetadataName
+                      : null,
                 ),
               Container(
                 width: double.infinity,
@@ -154,14 +161,14 @@ class _BookInfoSettingsState extends State<BookInfoSettings> {
                   children: [
                     const Spacer(),
                     TextButton(
-                      child: const Text('Delete'),
                       onPressed: () {
                         widget.onDelete();
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.red),
-                        foregroundColor: MaterialStateProperty.all(Colors.white),
+                        backgroundColor: WidgetStateProperty.all(Colors.red),
+                        foregroundColor: WidgetStateProperty.all(Colors.white),
                       ),
+                      child: const Text('Delete'),
                     ),
                     const Spacer(),
                   ],

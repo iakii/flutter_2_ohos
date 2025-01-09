@@ -7,10 +7,10 @@ class NoteColorButtons extends StatelessWidget {
   final void Function(SavedNoteColor color) onColorPressed;
 
   const NoteColorButtons({
-    Key? key,
+    super.key,
     this.selectedColor,
     required this.onColorPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

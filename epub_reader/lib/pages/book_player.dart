@@ -1,20 +1,25 @@
+import 'dart:ui';
+
 import 'package:bottom_inset_observer/bottom_inset_observer.dart';
 import 'package:epub_reader/managers/settings_manager.dart';
 import 'package:epub_reader/models/book_saved_data.dart';
 import 'package:epub_reader/providers/character_metadata/character_metadata.dart';
+import 'package:epub_reader/utils/ext_context.dart';
 import 'package:epub_reader/utils/get_files_from_epub_spine.dart';
 import 'package:epub_reader/widgets/characters_view/characters_view.dart';
 import 'package:epub_reader/widgets/epub_renderer/epub_server_files.dart';
-import 'package:epubz/epubz.dart';
+import 'package:epubx/epubx.dart';
 // import 'package:google_mlkit_translation/google_mlkit_translation.dart';
 import 'dart:math';
 import 'package:epub_reader/widgets/book_player/book_player_renderer.dart';
 import 'package:epub_reader/widgets/book_player/book_player_toolbar.dart';
-import 'package:epubz/epubz.dart' as epubz;
+import 'package:epubx/epubx.dart' as epubz;
 import 'package:epub_reader/widgets/book_player/book_player_bottom_options.dart';
 import 'package:epub_reader/widgets/book_player/book_player_customizer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// import 'package:path/path.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 import '../models/book.dart';
@@ -32,7 +37,7 @@ import 'book_player_search.dart';
 
 class BookPlayer extends StatefulWidget {
   const BookPlayer({
-    Key? key,
+    super.key,
     required this.book,
     required this.bookOptions,
     required this.wordDictionaryEnum,
@@ -40,7 +45,7 @@ class BookPlayer extends StatefulWidget {
     required this.wordsPerPage,
     // required this.translatorModelManager,
     required this.settingsManager,
-  }) : super(key: key);
+  });
 
   final Book book;
   final BookOptions bookOptions;
@@ -54,7 +59,8 @@ class BookPlayer extends StatefulWidget {
   State<BookPlayer> createState() => _BookPlayer();
 }
 
-class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin {
+class _BookPlayer extends State<BookPlayer>
+    with SingleTickerProviderStateMixin {
   bool showOptionsView = false;
   bool showCustomizer = false;
   epubz.EpubBook? epubBook;
@@ -73,7 +79,8 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
   bool showBottomOptions = false;
   final uuid = const Uuid();
   late final List<EpubContentFile> spineFiles;
-  final lastReadLocations = stack.Stack<EpubLocation<int, EpubConsistentInnerNavigation>>();
+  final lastReadLocations =
+      stack.Stack<EpubLocation<int, EpubConsistentInnerNavigation>>();
   bool ignoreLastReadLocation = false;
   late double pageWidth;
   late double pageHeight;
@@ -93,8 +100,10 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
   }
 
   Future<void> initialize() async {
-    pageWidth = MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width;
-    pageHeight = MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.height;
+    // ignore: deprecated_member_use
+    final size = window.physicalSize / window.devicePixelRatio;
+    pageWidth = size.width;
+    pageHeight = size.height;
     characterMetadata = await createCharacterMetadata(
       widget.book.savedData!.data.characterMetadata,
       localCharacters: widget.settingsManager.config.localCharacters,
@@ -144,22 +153,18 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
   Future<EpubLocation?> openChapterView() async {
     final chapters = epubBook!.Chapters!;
 
-    return await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return BookPlayerNavigationView(
-            spineFiles: spineFiles,
-            chapters: chapters,
-            currentChapter: linkSpineFileToChapter(
-              epubBook!,
-              bookController!.currentController.location.page,
-              spineFiles: spineFiles,
-              passedAnchors: bookController!.currentController.passedAnchors,
-            ),
-            currentSpineFile: spineFiles[bookController!.currentController.location.page],
-          );
-        },
+    return context.showSheet(
+      BookPlayerNavigationView(
+        spineFiles: spineFiles,
+        chapters: chapters,
+        currentChapter: linkSpineFileToChapter(
+          epubBook!,
+          bookController!.currentController.location.page,
+          spineFiles: spineFiles,
+          passedAnchors: bookController!.currentController.passedAnchors,
+        ),
+        currentSpineFile:
+            spineFiles[bookController!.currentController.location.page],
       ),
     );
   }
@@ -175,15 +180,11 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
   }
 
   Future<void> openSearch({String? query}) async {
-    final EpubLocation<int, EpubInnerTextNode>? location = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return BookPlayerSearch(
-            epubBook: epubBook!,
-            initialText: query,
-          );
-        },
+    final EpubLocation<int, EpubInnerTextNode>? location =
+        await context.showSheet<EpubLocation<int, EpubInnerTextNode>>(
+      BookPlayerSearch(
+        epubBook: epubBook!,
+        initialText: query,
       ),
     );
 
@@ -199,7 +200,9 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
       widget.book.savedData!.data.bottomTextType;
     });
 
-    if (!ignoreLastReadLocation && (widget.book.savedData!.data.consistentLocation != consistentLocation)) {
+    if (!ignoreLastReadLocation &&
+        (widget.book.savedData!.data.consistentLocation !=
+            consistentLocation)) {
       setState(() {
         lastReadLocations.push(widget.book.savedData!.data.consistentLocation);
       });
@@ -209,7 +212,12 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
 
     final location = bookController!.currentController.location;
 
-    widget.book.savedData!.data.progressSpine = location.page >= spineFiles.length - 1 && location.innerNav.page >= bookController!.currentController.innerPages! - 1 ? 1 : location.innerNav.page / innerPages;
+    widget.book.savedData!.data.progressSpine =
+        location.page >= spineFiles.length - 1 &&
+                location.innerNav.page >=
+                    bookController!.currentController.innerPages! - 1
+            ? 1
+            : location.innerNav.page / innerPages;
 
     widget.book.savedData!.data.consistentLocation = consistentLocation;
 
@@ -231,7 +239,7 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
   @override
   Widget build(BuildContext context) {
     if (epubBook == null || server?.server == null) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: CupertinoActivityIndicator());
     }
 
     final Color backgroundColor;
@@ -245,7 +253,7 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
         break;
     }
 
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
     return WillPopScope(
       onWillPop: () async {
@@ -280,7 +288,13 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
               AnimatedPositioned(
                 curve: Curves.easeInOut,
                 duration: const Duration(milliseconds: 400),
-                bottom: ((selectionRect != null) ? max(360 - (MediaQuery.of(context).size.height - (selectionRect!.bottom + 30)), 0) : 0),
+                bottom: ((selectionRect != null)
+                    ? max(
+                        360 -
+                            (MediaQuery.of(context).size.height -
+                                (selectionRect!.bottom + 30)),
+                        0)
+                    : 0),
                 child: IgnorePointer(
                   ignoring: showBottomOptions,
                   child: Center(
@@ -288,11 +302,13 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                       children: [
                         BookPlayerRenderer(
                           backgroundColor: backgroundColor,
-                          nextPageOnShake: widget.settingsManager.config.nextPageOnShake,
+                          nextPageOnShake:
+                              widget.settingsManager.config.nextPageOnShake,
                           width: pageWidth,
                           height: pageHeight,
                           savedNotes: widget.book.savedData!.data.notes,
-                          dragAnimation: widget.settingsManager.config.dragPageAnimation,
+                          dragAnimation:
+                              widget.settingsManager.config.dragPageAnimation,
                           onNotePressed: (note) async {
                             final bool hasDesc = note.description.isNotEmpty;
                             final SavedNoteColor color = note.color;
@@ -306,7 +322,8 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                                     child: BookPlayerNoteEditor(
                                       note: note,
                                       onDelete: () {
-                                        widget.book.savedData!.data.notes.remove(note);
+                                        widget.book.savedData!.data.notes
+                                            .remove(note);
                                         deleted = true;
                                         Navigator.pop(context);
                                       },
@@ -316,7 +333,9 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                               },
                             );
 
-                            if (deleted || hasDesc != note.description.isNotEmpty || color != note.color) {
+                            if (deleted ||
+                                hasDesc != note.description.isNotEmpty ||
+                                color != note.color) {
                               bookController!.setLocation(
                                 bookController!.currentController.location,
                                 forced: true,
@@ -331,7 +350,8 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                           onSaveLocation: onSaveLocation,
                           server: server!,
                           epubBook: epubBook!,
-                          initialLocation: widget.book.savedData!.data.consistentLocation,
+                          initialLocation:
+                              widget.book.savedData!.data.consistentLocation,
                           onSelection: (selection) {
                             if (selection.text.isNotEmpty) {
                               setState(() {
@@ -359,7 +379,16 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    widget.book.savedData!.data.bottomTextType = BookPlayerBottomTextType.values[(widget.book.savedData!.data.bottomTextType.index + 1) % BookPlayerBottomTextType.values.length];
+                                    widget.book.savedData!.data.bottomTextType =
+                                        BookPlayerBottomTextType.values[(widget
+                                                    .book
+                                                    .savedData!
+                                                    .data
+                                                    .bottomTextType
+                                                    .index +
+                                                1) %
+                                            BookPlayerBottomTextType
+                                                .values.length];
                                   });
                                   widget.book.savedData!.saveData();
                                 },
@@ -370,7 +399,8 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                                     vertical: 8,
                                   ),
                                   child: BookPlayerBottomText(
-                                    type: widget.book.savedData!.data.bottomTextType,
+                                    type: widget
+                                        .book.savedData!.data.bottomTextType,
                                     bookSavedData: widget.book.savedData!,
                                     wordsPerPage: widget.wordsPerPage,
                                   ),
@@ -385,8 +415,8 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                 ),
               ),
               GestureDetector(
-                onTap: showBottomOptions ? () => toggleBottomOptions() : null,
-                onLongPress: () => toggleBottomOptions(),
+                onTap: () => toggleBottomOptions(),
+                // onLongPress: () => toggleBottomOptions(),
               ),
               AnimatedPositioned(
                 curve: Curves.easeInOut,
@@ -399,70 +429,70 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                     const Spacer(),
                     if (showToolBar)
                       Container(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(10),
-                            ),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(10),
                           ),
-                          height: 50,
-                          width: min(400, MediaQuery.of(context).size.width - 40),
-                          child: Center(
-                            child: BookPlayerToolbar(
-                              text: highlightedText,
-                              onCopy: () {
-                                Clipboard.setData(ClipboardData(text: highlightedText));
-                                hideToolbar();
-                              },
-                              onWebSearch: () {
-                                launchUrl(
-                                  Uri(
-                                    scheme: 'https',
-                                    host: 'www.google.com',
-                                    path: '/search',
-                                    queryParameters: {
-                                      'q': highlightedText,
-                                    },
-                                  ),
-                                  mode: LaunchMode.externalApplication,
+                        ),
+                        height: 50,
+                        width: min(400, MediaQuery.of(context).size.width - 40),
+                        child: Center(
+                          child: BookPlayerToolbar(
+                            text: highlightedText,
+                            onCopy: () {
+                              Clipboard.setData(
+                                  ClipboardData(text: highlightedText));
+                              hideToolbar();
+                            },
+                            onWebSearch: () {
+                              launchUrl(
+                                Uri(
+                                  scheme: 'https',
+                                  host: 'www.google.com',
+                                  path: '/search',
+                                  queryParameters: {
+                                    'q': highlightedText,
+                                  },
+                                ),
+                                mode: LaunchMode.externalApplication,
+                              );
+                            },
+                            onAddNote: (color) async {
+                              widget.book.savedData!.data.notes.add(
+                                SavedNote(
+                                  id: uuid.v4(),
+                                  color: color,
+                                  highlightedText: highlightedText,
+                                  page: bookController!
+                                      .currentController.location.page,
+                                  description: "",
+                                  rangesData: highlightedRanges,
+                                ),
+                              );
+                              //await widget.book.savedData!.saveData();
+                              bookController!.setLocation(
+                                bookController!.currentController.location,
+                                forced: true,
+                              );
+                            },
+                            onSearch: () => openSearch(query: highlightedText),
+                            onCharacter: () {
+                              hideToolbar();
+                              if (characterMetadata != null) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content: CharactersView(
+                                        characterMetadata: characterMetadata!,
+                                        initialQuery: highlightedText,
+                                      ),
+                                    );
+                                  },
                                 );
-                              },
-                              onAddNote: (color) async {
-                                widget.book.savedData!.data.notes.add(
-                                  SavedNote(
-                                    id: uuid.v4(),
-                                    color: color,
-                                    highlightedText: highlightedText,
-                                    page: bookController!.currentController.location.page,
-                                    description: "",
-                                    rangesData: highlightedRanges,
-                                  ),
-                                );
-                                //await widget.book.savedData!.saveData();
-                                bookController!.setLocation(
-                                  bookController!.currentController.location,
-                                  forced: true,
-                                );
-                              },
-                              onSearch: () => openSearch(query: highlightedText),
-                              onCharacter: () {
-                                hideToolbar();
-                                if (characterMetadata != null) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        content: CharactersView(
-                                          characterMetadata: characterMetadata!,
-                                          initialQuery: highlightedText,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                }
-                              },
-                            ),
+                              }
+                            },
                           ),
                         ),
                       ),
@@ -498,8 +528,8 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                 curve: Curves.easeInOut,
                 duration: const Duration(milliseconds: 100),
                 bottom: showBottomOptions ? 0 : -60,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
                 child: Column(
                   children: [
                     const Spacer(),
@@ -508,8 +538,10 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                       color: Theme.of(context).primaryColor,
                       width: min(500, MediaQuery.of(context).size.width),
                       child: BookPlayerBottomOptions(
-                        page: widget.book.savedData!.getBookPageProgress(widget.wordsPerPage),
-                        pages: widget.book.savedData!.getPages(widget.wordsPerPage),
+                        page: widget.book.savedData!
+                            .getBookPageProgress(widget.wordsPerPage),
+                        pages: widget.book.savedData!
+                            .getPages(widget.wordsPerPage),
                         book: widget.book,
                         onPageChanged: (a) {},
                         onSearch: () => openSearch(),
@@ -517,35 +549,10 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                           Navigator.pop(context);
                         },
                         onOptions: () {
-                          if (showCustomizer) {
-                            closeCustomizer();
-                          } else {
-                            setState(() {
-                              showCustomizer = true;
-                            });
-                          }
+                          openCustomizerView();
                         },
                         onNotesPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return BookPlayerNotesViewer(
-                                  notes: widget.book.savedData!.data.notes,
-                                  onPressNote: (savedNote) async {
-                                    bookController!.setLocation(EpubLocation(
-                                      savedNote.page,
-                                      EpubInnerNode(
-                                        savedNote.rangesData.first.startNodeIndex,
-                                        savedNote.rangesData.first.startOffset,
-                                      ),
-                                    ));
-                                    Navigator.pop(context);
-                                  },
-                                );
-                              },
-                            ),
-                          );
+                          openNotesView();
                         },
                         onChaptersViewPressed: () async {
                           if (bookController == null) {
@@ -562,7 +569,8 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                           if (lastReadLocations.isEmpty) return;
                           ignoreLastReadLocation = true;
                           setState(() {
-                            bookController!.setLocation(lastReadLocations.pop());
+                            bookController!
+                                .setLocation(lastReadLocations.pop());
                           });
                         },
                       ),
@@ -570,51 +578,54 @@ class _BookPlayer extends State<BookPlayer> with SingleTickerProviderStateMixin 
                   ],
                 ),
               ),
-              // Customizer
-              IgnorePointer(
-                ignoring: !showCustomizer,
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 100),
-                  opacity: showCustomizer ? 1 : 0,
-                  child: Row(
-                    children: [
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          top: 60,
-                        ),
-                        child: Column(
-                          children: [
-                            const Spacer(),
-                            SizedBox(
-                              width: min(400, MediaQuery.of(context).size.width - 40),
-                              height: 300,
-                              child: bookController != null
-                                  ? BookPlayerCustomizer(
-                                      styleProperties: bookController!.style,
-                                      onUpdateStyle: () {
-                                        bookController!.updateStyle();
-                                        setState(() {});
-                                        widget.book.savedData!.data.styleProperties = bookController!.style;
-                                        widget.book.savedData!.saveData();
-                                      },
-                                    )
-                                  : Container(),
-                            ),
-                            const SizedBox(height: 80),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void openNotesView() {
+    context.showSheet(
+      BookPlayerNotesViewer(
+        notes: widget.book.savedData!.data.notes,
+        onPressNote: (savedNote) async {
+          bookController!.setLocation(EpubLocation(
+            savedNote.page,
+            EpubInnerNode(
+              savedNote.rangesData.first.startNodeIndex,
+              savedNote.rangesData.first.startOffset,
+            ),
+          ));
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
+  void openCustomizerView() {
+    context.showSheet(
+      Column(
+        children: [
+          // const Spacer(),
+          SizedBox(
+            width: min(400, MediaQuery.of(context).size.width - 40),
+            height: 300,
+            child: BookPlayerCustomizer(
+              styleProperties: bookController!.style,
+              onUpdateStyle: () {
+                bookController!.updateStyle();
+                setState(() {});
+                widget.book.savedData!.data.styleProperties =
+                    bookController!.style;
+                widget.book.savedData!.saveData();
+              },
+            ),
+          ),
+          const SizedBox(height: 80),
+        ],
+      ),
+      height: 500,
     );
   }
 }

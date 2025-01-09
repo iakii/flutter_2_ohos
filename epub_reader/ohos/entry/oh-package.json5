@@ -10,6 +10,7 @@
     "url_launcher_ohos": "file:../har/url_launcher_ohos.har",
     "file_picker_ohos": "file:../har/file_picker_ohos.har",
     "permission_handler_ohos": "file:../har/permission_handler_ohos.har",
-    "flutter_inappwebview_ohos": "file:../har/flutter_inappwebview_ohos.har"
+    "flutter_inappwebview_ohos": "file:../har/flutter_inappwebview_ohos.har",
+    "flutter_js_ohos": "file:../har/flutter_js_ohos.har"
   }
 }

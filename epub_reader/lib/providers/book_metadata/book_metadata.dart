@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:http/http.dart';
+
+// Project imports:
 import 'package:epub_reader/models/book.dart';
 
 abstract class BookMetadata {

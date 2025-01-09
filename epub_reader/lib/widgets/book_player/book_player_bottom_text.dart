@@ -1,5 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
 import '../../models/book_saved_data.dart';
 
 enum BookPlayerBottomTextType {

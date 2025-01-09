@@ -1,7 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
+// Project imports:
 import '../../models/character.dart';
 import '../../providers/character_metadata/character_metadata.dart';
 

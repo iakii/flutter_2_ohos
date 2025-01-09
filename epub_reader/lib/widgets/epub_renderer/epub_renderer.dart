@@ -1,12 +1,17 @@
+// Dart imports:
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:epub_reader/models/book_saved_data.dart';
-import 'package:epub_reader/utils/enum_from_index.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+// Project imports:
+import 'package:epub_reader/models/book_saved_data.dart';
+import 'package:epub_reader/utils/enum_from_index.dart';
 import 'epub_location.dart';
 
 class EpubPage {

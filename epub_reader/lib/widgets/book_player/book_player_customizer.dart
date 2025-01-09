@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import '../epub_renderer/epub_renderer.dart';
 
 class BookPlayerCustomizer extends StatefulWidget {

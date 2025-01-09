@@ -1,7 +1,14 @@
+// Dart imports:
 import 'dart:convert';
-import 'package:epub_reader/models/character.dart';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:http/http.dart';
+
+// Project imports:
+import 'package:epub_reader/models/character.dart';
 import 'character_metadata.dart';
 
 class AnilistCharacterMetadata extends CharacterMetadata {

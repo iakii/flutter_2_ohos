@@ -1,10 +1,13 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// import 'package:google_mlkit_translation/google_mlkit_translation.dart';
-
+// Project imports:
 import '../../models/word_definition.dart';
 import '../../providers/word_dictionary/word_dictionary.dart';
+
+// import 'package:google_mlkit_translation/google_mlkit_translation.dart';
+
 
 class BookPlayerWordInfo extends StatefulWidget {
   const BookPlayerWordInfo({

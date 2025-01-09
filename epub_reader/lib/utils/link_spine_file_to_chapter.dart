@@ -1,8 +1,11 @@
+// Dart imports:
 import 'dart:math';
 
+// Package imports:
 import 'package:collection/collection.dart';
 import 'package:epubx/epubx.dart';
 
+// Project imports:
 import 'get_all_sub_epub_chapters.dart';
 import 'get_files_from_epub_spine.dart';
 

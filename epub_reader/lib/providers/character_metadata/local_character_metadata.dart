@@ -1,6 +1,9 @@
+// Package imports:
+import 'package:string_similarity/string_similarity.dart';
+
+// Project imports:
 import 'package:epub_reader/models/character.dart';
 import 'character_metadata.dart';
-import 'package:string_similarity/string_similarity.dart';
 
 class LocalCharacterMetadata extends CharacterMetadata {
   final List<Character> characters;

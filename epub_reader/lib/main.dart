@@ -1,12 +1,18 @@
+// Dart imports:
 import 'dart:io';
+
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
+
+// Package imports:
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter/scheduler.dart' show timeDilation;
 
+// Project imports:
 import 'managers/settings_manager.dart';
 import 'pages/home.dart';
 import 'widgets/custom_underline_tab_indicator.dart';

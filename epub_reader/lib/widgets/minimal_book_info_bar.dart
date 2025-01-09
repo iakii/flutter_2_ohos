@@ -1,6 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+// Project imports:
 import '../models/book.dart';
 import '../utils/remove_leading_zeros.dart';
 
@@ -79,9 +83,7 @@ class _MinimalBookInfoBarState extends State<MinimalBookInfoBar> {
 }
 
 class _Separator extends StatelessWidget {
-  const _Separator({
-    super.key,
-  });
+  const _Separator();
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +97,6 @@ class _Separator extends StatelessWidget {
 
 class _TextInfo extends StatelessWidget {
   const _TextInfo({
-    super.key,
     required this.value,
     required this.topic,
     this.onTap,

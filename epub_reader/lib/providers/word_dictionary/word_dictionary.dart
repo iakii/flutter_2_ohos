@@ -1,6 +1,8 @@
-import 'package:epub_reader/models/word_definition.dart';
+// Package imports:
 import 'package:http/http.dart' as http;
 
+// Project imports:
+import 'package:epub_reader/models/word_definition.dart';
 import 'dictionary_api.dart';
 
 abstract class WordDictionary {

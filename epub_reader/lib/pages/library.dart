@@ -1,6 +1,11 @@
+// Dart imports:
 import 'dart:io';
-import 'package:epub_reader/widgets/books_viewer.dart';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:epub_reader/widgets/books_viewer.dart';
 import '../managers/settings_manager.dart';
 import '../models/book.dart';
 import '../widgets/add_book_to_shelf.dart';

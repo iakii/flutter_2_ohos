@@ -1,7 +1,8 @@
+// Dart imports:
 import 'dart:convert';
 
+// Project imports:
 import 'package:epub_reader/models/word_definition.dart';
-
 import 'word_dictionary.dart';
 
 class DictionaryApi extends WordDictionary {

@@ -1,14 +1,22 @@
+// Dart imports:
 import 'dart:async';
 import 'dart:io';
-import 'package:epub_reader/models/book.dart';
-import 'package:epub_reader/models/book_saved_data.dart';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
-// import 'package:permission_handler/permission_handler.dart';
+
+// Package imports:
 import 'package:http/http.dart';
 import 'package:path/path.dart' as p;
 import 'package:uuid/uuid.dart';
 
+// Project imports:
+import 'package:epub_reader/models/book.dart';
+import 'package:epub_reader/models/book_saved_data.dart';
 import '../providers/book_downloader/book_downloader.dart';
+
+// import 'package:permission_handler/permission_handler.dart';
+
 
 enum Stage {
   idle,

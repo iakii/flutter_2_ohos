@@ -1,5 +1,8 @@
-import 'package:epub_reader/widgets/book_player/note_color_buttons.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:epub_reader/widgets/book_player/note_color_buttons.dart';
 import '../models/book_saved_data.dart';
 
 class BookPlayerNoteEditor extends StatefulWidget {

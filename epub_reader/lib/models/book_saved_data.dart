@@ -1,15 +1,20 @@
+// Dart imports:
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:epub_reader/widgets/epub_renderer/epub_location.dart';
-import 'package:epubx/epubx.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:epubx/epubx.dart';
 import 'package:html/parser.dart';
 import 'package:image/image.dart' as img;
 import 'package:palette_generator/palette_generator.dart';
 import 'package:path/path.dart' as p;
 
+// Project imports:
+import 'package:epub_reader/widgets/epub_renderer/epub_location.dart';
 import '../providers/character_metadata/character_metadata.dart';
 import '../utils/get_files_from_epub_spine.dart';
 import '../utils/hex_color.dart';

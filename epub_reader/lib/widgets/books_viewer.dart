@@ -1,6 +1,11 @@
-import 'package:epub_reader/widgets/book_3d.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:responsive_grid_list/responsive_grid_list.dart';
+
+// Project imports:
+import 'package:epub_reader/widgets/book_3d.dart';
 import '../managers/settings_manager.dart';
 import '../models/book.dart';
 

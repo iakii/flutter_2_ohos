@@ -1,13 +1,18 @@
+// Dart imports:
 import 'dart:io';
 
-import 'package:epub_reader/pages/home_settings.dart';
-import 'package:epub_reader/providers/book_downloader/book_downloader.dart';
-import 'package:file_picker_ohos/file_picker_ohos.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:file_picker_ohos/file_picker_ohos.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:http/http.dart';
 
+// Project imports:
+import 'package:epub_reader/pages/home_settings.dart';
+import 'package:epub_reader/providers/book_downloader/book_downloader.dart';
 import '../managers/settings_manager.dart';
 import '../models/book.dart';
 import '../widgets/book_downloader_interface.dart';

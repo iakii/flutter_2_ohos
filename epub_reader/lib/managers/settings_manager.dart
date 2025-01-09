@@ -1,11 +1,17 @@
-import 'dart:io';
-import 'package:epub_reader/utils/enum_from_index.dart';
-import 'package:flutter/material.dart';
-import 'package:path/path.dart' as p;
-import 'package:epub_reader/models/book_saved_data.dart';
+// Dart imports:
 import 'dart:convert';
+import 'dart:io';
+
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:path/path.dart' as p;
 import 'package:uuid/uuid.dart';
 
+// Project imports:
+import 'package:epub_reader/models/book_saved_data.dart';
+import 'package:epub_reader/utils/enum_from_index.dart';
 import '../models/book.dart';
 import '../models/character.dart';
 import '../providers/book_downloader/book_downloader.dart';

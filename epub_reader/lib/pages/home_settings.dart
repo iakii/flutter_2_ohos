@@ -1,24 +1,30 @@
+// Dart imports:
 import 'dart:convert';
 import 'dart:io';
+
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:archive/archive_io.dart';
+import 'package:file_picker_ohos/file_picker_ohos.dart';
+import 'package:flutter_file_dialog/flutter_file_dialog.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+
+// Project imports:
 import 'package:epub_reader/providers/book_downloader/book_downloader.dart';
 import 'package:epub_reader/providers/book_metadata/book_metadata.dart';
 import 'package:epub_reader/providers/word_dictionary/word_dictionary.dart';
 import 'package:epub_reader/widgets/clean_app_bar.dart';
 import 'package:epub_reader/widgets/confirm_popup.dart';
 import 'package:epub_reader/widgets/settings_switch.dart';
-import 'package:file_picker_ohos/file_picker_ohos.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_file_dialog/flutter_file_dialog.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
-
 import '../managers/settings_manager.dart';
 import '../models/character.dart';
 import '../utils/remove_leading_zeros.dart';
 import '../widgets/input_popup.dart';
 import '../widgets/settings_enum_dropdown.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
 
 class HomeSettings extends StatefulWidget {
   const HomeSettings({

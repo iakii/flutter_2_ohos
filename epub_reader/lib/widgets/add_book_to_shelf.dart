@@ -1,6 +1,10 @@
-import 'package:collection/collection.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:collection/collection.dart';
+
+// Project imports:
 import '../managers/settings_manager.dart';
 import '../models/book.dart';
 

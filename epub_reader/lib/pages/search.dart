@@ -1,8 +1,12 @@
-import 'package:epub_reader/widgets/book_3d.dart';
-import 'package:epub_reader/widgets/message_popup.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:http/http.dart' as http;
 
-import 'package:flutter/material.dart';
+// Project imports:
+import 'package:epub_reader/widgets/book_3d.dart';
+import 'package:epub_reader/widgets/message_popup.dart';
 import '../managers/settings_manager.dart';
 import '../models/book.dart';
 import '../providers/book_metadata/book_metadata.dart';

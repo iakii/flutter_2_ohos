@@ -1,8 +1,15 @@
+// Dart imports:
 import 'dart:async';
 import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:palette_generator/palette_generator.dart';
 import 'dart:ui' as ui;
+
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:palette_generator/palette_generator.dart';
+
+// Project imports:
 import '../models/book.dart';
 import '../utils/lighten_color.dart';
 import '../utils/progress_value.dart';

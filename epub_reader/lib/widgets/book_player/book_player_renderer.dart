@@ -1,15 +1,22 @@
+// Dart imports:
 import 'dart:math';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:epubx/epubx.dart';
+import 'package:path/path.dart' as p;
+import 'package:url_launcher/url_launcher.dart';
+
+// Project imports:
 import 'package:epub_reader/utils/get_files_from_epub_spine.dart';
 import 'package:epub_reader/widgets/epub_renderer/epub_location.dart';
 import 'package:epub_reader/widgets/epub_renderer/epub_server_files.dart';
-import 'package:epubx/epubx.dart';
-import 'package:flutter/material.dart';
-import 'package:path/path.dart' as p;
-// import 'package:shake/shake.dart';
 import '../../models/book_saved_data.dart';
 import '../epub_renderer/epub_renderer.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+// import 'package:shake/shake.dart';
 
 final isUrlRegex = RegExp("^(?:[a-z+]+:)?//", caseSensitive: false);
 

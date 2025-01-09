@@ -1,8 +1,12 @@
+// Dart imports:
 import 'dart:math';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:epub_reader/pages/book_info.dart';
 import 'package:epub_reader/widgets/book_3d.dart';
-import 'package:flutter/material.dart';
 import '../managers/settings_manager.dart';
 import '../models/book.dart';
 

@@ -1,6 +1,10 @@
+// Dart imports:
 import 'dart:math';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import '../../models/book.dart';
 
 // class BookPlayerBottomOptions extends StatelessWidget {

@@ -1,39 +1,46 @@
+// Dart imports:
+import 'dart:math';
 import 'dart:ui';
 
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
 import 'package:bottom_inset_observer/bottom_inset_observer.dart';
+import 'package:epubx/epubx.dart' as epubz;
+import 'package:epubx/epubx.dart';
+import 'package:stack/stack.dart' as stack;
+import 'package:url_launcher/url_launcher.dart';
+import 'package:uuid/uuid.dart';
+
+// Project imports:
 import 'package:epub_reader/managers/settings_manager.dart';
 import 'package:epub_reader/models/book_saved_data.dart';
 import 'package:epub_reader/providers/character_metadata/character_metadata.dart';
 import 'package:epub_reader/utils/ext_context.dart';
 import 'package:epub_reader/utils/get_files_from_epub_spine.dart';
-import 'package:epub_reader/widgets/characters_view/characters_view.dart';
-import 'package:epub_reader/widgets/epub_renderer/epub_server_files.dart';
-import 'package:epubx/epubx.dart';
-// import 'package:google_mlkit_translation/google_mlkit_translation.dart';
-import 'dart:math';
-import 'package:epub_reader/widgets/book_player/book_player_renderer.dart';
-import 'package:epub_reader/widgets/book_player/book_player_toolbar.dart';
-import 'package:epubx/epubx.dart' as epubz;
 import 'package:epub_reader/widgets/book_player/book_player_bottom_options.dart';
 import 'package:epub_reader/widgets/book_player/book_player_customizer.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-// import 'package:path/path.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:uuid/uuid.dart';
+import 'package:epub_reader/widgets/book_player/book_player_renderer.dart';
+import 'package:epub_reader/widgets/book_player/book_player_toolbar.dart';
+import 'package:epub_reader/widgets/characters_view/characters_view.dart';
+import 'package:epub_reader/widgets/epub_renderer/epub_server_files.dart';
 import '../models/book.dart';
 import '../providers/word_dictionary/word_dictionary.dart';
 import '../utils/link_spine_file_to_chapter.dart';
 import '../widgets/book_player/book_player_bottom_text.dart';
 import '../widgets/book_player/book_player_word_info.dart';
-import 'package:stack/stack.dart' as stack;
 import '../widgets/epub_renderer/epub_location.dart';
 import '../widgets/epub_renderer/epub_renderer.dart';
 import 'book_player_navigation_view.dart';
 import 'book_player_note_editor.dart';
 import 'book_player_notes_viewer.dart';
 import 'book_player_search.dart';
+
+// import 'package:google_mlkit_translation/google_mlkit_translation.dart';
+// import 'package:path/path.dart';
 
 class BookPlayer extends StatefulWidget {
   const BookPlayer({

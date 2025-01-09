@@ -1,94 +1,74 @@
-name: epub_reader
-description: A new Flutter project.
-
-publish_to: "none"
-
-version: 1.0.0+1
-
+name: "epub_reader"
+version: "1.0.0+1"
+publish_to: none
 environment:
   sdk: ">=3.4.0 <4.0.0"
-
+description: A new Flutter project.
 dependencies:
-  flutter:
-    sdk: flutter
-
-  cupertino_icons: ^1.0.2
-  after_layout: ^1.1.0
-  collection: ^1.18.0
+  after_layout: "^1.1.0"
+  archive: "^3.3.1"
+  bottom_inset_observer: "^3.0.1"
+  collection: "^1.18.0"
+  cupertino_icons: "^1.0.2"
   epubx:
-    path: ../../flutter_plugins/packages/epubx
-
-  # epubz:
-  #   #  path: ../dart-epubz
-  #   git:
-  #     url: https://github.com/FlafyDev/dart-epubz.git
-  #     ref: dev
-  http: ^1.2.2
-  palette_generator: ^0.3.3
-  scroll_snap_list: ^0.9.1
-  # googleapis: ^9.1.0
-  responsive_grid_list: ^1.2.4
-  html: ^0.15.0
-  path: ^1.8.0
-  path_provider:
-    git:
-      url: https://gitee.com/openharmony-sig/flutter_packages.git
-      path: packages/path_provider/path_provider
-  uuid: ^4.5.1
-  # permission_handler:
-  #   git:
-  #     url: https://gitee.com/openharmony-sig/flutter_permission_handler.git
-  #     path: permission_handler
-  separated_column: ^3.0.3
-  # google_mlkit_translation: ^0.3.0
-  mime: ^2.0.0
-  url_launcher:
-    git:
-      url: https://gitee.com/openharmony-sig/flutter_packages.git
-      path: packages/url_launcher/url_launcher
-  flutter_html: ^3.0.0-alpha.5
-  flutter_inappwebview:
-    git:
-      url: https://gitee.com/openharmony-sig/flutter_inappwebview.git
-      path: flutter_inappwebview
-      rerf: master
-  flutter_inappwebview_ohos:
-    git:
-      url: https://gitee.com/openharmony-sig/flutter_inappwebview.git
-      path: flutter_inappwebview_ohos
-      rerf: master
-  # flutter_inappwebview_windows: 0.6.0
-  flutter_markdown: ^0.7.5
-  bottom_inset_observer: ^3.0.1
-  scrollable_positioned_list: ^0.3.8
-  flutter_rating_bar: ^4.0.1
-  equatable: ^2.0.3
-  stack: ^0.2.1
+    path: "../../flutter_plugins/packages/epubx"
+  equatable: "^2.0.3"
   file_picker_ohos:
     git:
-      url: https://gitee.com/openharmony-sig/fluttertpc_file_picker.git
-      path: ohos
+      url: "https://gitee.com/openharmony-sig/fluttertpc_file_picker.git"
       ref: master
-  flutter_phoenix: ^1.0.0
-  archive: ^3.3.1
-  flutter_file_dialog: ^3.0.2
-  font_awesome_flutter: ^10.1.0
-  string_similarity: ^2.0.0
-  shake: ^2.1.0
-  image: ^3.3.0
-
-dev_dependencies:
-  flutter_test:
+      path: ohos
+  flutter:
     sdk: flutter
-
-  flutter_lints: ^4.0.0
-
-dependency_overrides:
+  flutter_file_dialog: "^3.0.2"
+  flutter_html: "^3.0.0-alpha.5"
+  flutter_inappwebview:
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_inappwebview.git"
+      path: "flutter_inappwebview"
+  flutter_inappwebview_ohos:
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_inappwebview.git"
+      path: "flutter_inappwebview_ohos"
+  flutter_js_ohos: "^0.6.8"
+  flutter_markdown: "^0.7.5"
+  flutter_phoenix: "^1.0.0"
+  flutter_rating_bar: "^4.0.1"
+  font_awesome_flutter: "^10.1.0"
+  html: "^0.15.0"
+  http: "^1.2.2"
+  image: "^3.3.0"
+  mime: "^2.0.0"
+  palette_generator: "^0.3.3"
+  path: "^1.8.0"
   path_provider:
     git:
-      url: https://gitee.com/openharmony-sig/flutter_packages.git
-      path: packages/path_provider/path_provider
-
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/path_provider/path_provider"
+  responsive_grid_list: "^1.2.4"
+  scroll_snap_list: "^0.9.1"
+  scrollable_positioned_list: "^0.3.8"
+  separated_column: "^3.0.3"
+  shake: "^2.1.0"
+  stack: "^0.2.1"
+  string_similarity: "^2.0.0"
+  url_launcher:
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/url_launcher/url_launcher"
+  uuid: "^4.5.1"
+dev_dependencies:
+  flutter_lints: "^4.0.0"
+  flutter_test:
+    sdk: flutter
+  import_sorter: "^4.6.0"
+  pubspec_dependency_sorter: "^1.0.5"
+dependency_overrides:
+  http: "^1.2.2"
+  path_provider:
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/path_provider/path_provider"
 flutter:
   uses-material-design: true
   assets:

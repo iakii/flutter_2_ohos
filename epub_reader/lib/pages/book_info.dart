@@ -1,6 +1,11 @@
+// Dart imports:
 import 'dart:math';
-import 'package:epub_reader/widgets/minimal_book_info_bar.dart';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:epub_reader/widgets/minimal_book_info_bar.dart';
 import '../models/book.dart';
 import '../utils/progress_value.dart';
 import '../widgets/book_3d.dart';

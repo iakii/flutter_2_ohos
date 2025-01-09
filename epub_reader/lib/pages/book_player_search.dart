@@ -1,14 +1,19 @@
+// Dart imports:
 import 'dart:async';
 import 'dart:math';
 
-import 'package:epub_reader/utils/get_files_from_epub_spine.dart';
-import 'package:epub_reader/widgets/epub_renderer/epub_location.dart';
-import 'package:epubx/epubx.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:epubx/epubx.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart';
 
+// Project imports:
+import 'package:epub_reader/utils/get_files_from_epub_spine.dart';
+import 'package:epub_reader/widgets/epub_renderer/epub_location.dart';
 import '../utils/link_spine_file_to_chapter.dart';
 
 class SearchResults {

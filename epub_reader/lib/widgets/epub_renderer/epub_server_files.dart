@@ -1,9 +1,14 @@
+// Dart imports:
 import 'dart:convert';
 import 'dart:io';
-import 'package:path/path.dart' as p;
 import 'dart:typed_data';
-import 'package:epubx/epubx.dart';
+
+// Flutter imports:
 import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:epubx/epubx.dart';
+import 'package:path/path.dart' as p;
 
 class EpubServerFiles {
   final EpubBook epubBook;

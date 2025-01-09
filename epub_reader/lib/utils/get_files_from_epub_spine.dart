@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:epubx/epubx.dart';
+
+// Project imports:
 import 'get_spine_items_from_epub.dart';
 
 List<EpubContentFile> getFilesFromEpubSpine(EpubBook epubBook) {

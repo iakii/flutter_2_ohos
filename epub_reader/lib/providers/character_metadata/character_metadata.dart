@@ -1,7 +1,10 @@
+// Package imports:
+import 'package:http/http.dart' as http;
+
+// Project imports:
 import '../../models/character.dart';
 import 'anilist_character_metadata.dart';
 import 'local_character_metadata.dart';
-import 'package:http/http.dart' as http;
 
 abstract class CharacterMetadata {
   Future<List<Character>> search(String query);

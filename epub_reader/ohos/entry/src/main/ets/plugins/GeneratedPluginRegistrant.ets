@@ -1,6 +1,7 @@
 import { FlutterEngine, Log } from '@ohos/flutter_ohos';
 import FilePickerPlugin from 'file_picker_ohos';
 import InAppWebViewFlutterPlugin from 'flutter_inappwebview_ohos';
+import FlutterJsPlugin from 'flutter_js_ohos';
 import PathProviderPlugin from 'path_provider_ohos';
 import UrlLauncherPlugin from 'url_launcher_ohos';
 
@@ -18,6 +19,7 @@ export class GeneratedPluginRegistrant {
     try {
       flutterEngine.getPlugins()?.add(new FilePickerPlugin());
       flutterEngine.getPlugins()?.add(new InAppWebViewFlutterPlugin());
+      flutterEngine.getPlugins()?.add(new FlutterJsPlugin());
       flutterEngine.getPlugins()?.add(new PathProviderPlugin());
       flutterEngine.getPlugins()?.add(new UrlLauncherPlugin());
     } catch (e) {

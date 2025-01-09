@@ -1,5 +1,8 @@
-import 'package:epub_reader/models/book_saved_data.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:epub_reader/models/book_saved_data.dart';
 
 class Book {
   String name;

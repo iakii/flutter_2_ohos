@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:epubx/epubx.dart';
+
 // ignore: implementation_imports
 
 List<EpubManifestItem> getSpineItemsFromEpub(EpubBook epubBook) {

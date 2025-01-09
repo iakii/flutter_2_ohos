@@ -1,7 +1,11 @@
-import 'package:epub_reader/widgets/book_player/note_color_buttons.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Project imports:
+import 'package:epub_reader/widgets/book_player/note_color_buttons.dart';
 import '../../models/book_saved_data.dart';
 
 enum _ToolBarViews {

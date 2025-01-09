@@ -1,6 +1,11 @@
+// Dart imports:
 import 'dart:math';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+
+// Project imports:
 import 'book_3d.dart';
 
 class Book3dInteractive extends StatefulWidget {

@@ -8,6 +8,10 @@ husky:
 		@dart run husky install
 		@dart run husky add .husky/pre-commit "make format"
 
+i18n:
+		@echo "Generating i18n files..."
+		@flutter gen-l10n
+
 launcher_icon:
 		@dart pub get
 		@dart run flutter_launcher_icons

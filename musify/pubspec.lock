@@ -478,10 +478,10 @@ packages:
     dependency: transitive
     description:
       name: js
-      sha256: "5528c2f391ededb7775ec1daa69e65a2d61276f7552de2b5f7b8d34ee9fd4ab7"
+      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.7"
   json_annotation:
     dependency: transitive
     description:
@@ -493,12 +493,19 @@ packages:
   just_audio:
     dependency: "direct main"
     description:
-      path: just_audio
-      ref: master
-      resolved-ref: d1128eac1445e229e51d8c87ebf2759c06333588
-      url: "https://gitee.com/openharmony-sig/fluttertpc_just_audio.git"
-    source: git
-    version: "0.9.37"
+      name: just_audio
+      sha256: a49e7120b95600bd357f37a2bb04cd1e88252f7cdea8f3368803779b925b1049
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.9.42"
+  just_audio_media_kit:
+    dependency: "direct main"
+    description:
+      name: just_audio_media_kit
+      sha256: "9f3517213dfc7bbaf6980656feb66c35600f114c7efc0b5b3f4476cd5c18b45e"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.6"
   just_audio_ohos:
     dependency: "direct main"
     description:
@@ -520,10 +527,10 @@ packages:
     dependency: transitive
     description:
       name: just_audio_web
-      sha256: "134356b0fe3d898293102b33b5fd618831ffdc72bb7a1b726140abdf22772b70"
+      sha256: "9a98035b8b24b40749507687520ec5ab404e291d2b0937823ff45d92cb18d448"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.4.9"
+    version: "0.4.13"
   leak_tracker:
     dependency: transitive
     description:
@@ -588,6 +595,38 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.8.0"
+  media_kit:
+    dependency: transitive
+    description:
+      name: media_kit
+      sha256: "1f1deee148533d75129a6f38251ff8388e33ee05fc2d20a6a80e57d6051b7b62"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.11"
+  media_kit_libs_linux:
+    dependency: "direct main"
+    description:
+      name: media_kit_libs_linux
+      sha256: e186891c31daa6bedab4d74dcdb4e8adfccc7d786bfed6ad81fe24a3b3010310
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.3"
+  media_kit_libs_macos_audio:
+    dependency: "direct main"
+    description:
+      name: media_kit_libs_macos_audio
+      sha256: "3be21844df98f286de32808592835073cdef2c1a10078bac135da790badca950"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.4"
+  media_kit_libs_windows_audio:
+    dependency: "direct main"
+    description:
+      name: media_kit_libs_windows_audio
+      sha256: c2fd558cc87b9d89a801141fcdffe02e338a3b21a41a18fbd63d5b221a1b8e53
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.9"
   meta:
     dependency: transitive
     description:
@@ -718,6 +757,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.27.7"
+  safe_local_storage:
+    dependency: transitive
+    description:
+      name: safe_local_storage
+      sha256: ede4eb6cb7d88a116b3d3bf1df70790b9e2038bc37cb19112e381217c74d9440
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -835,6 +882,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.2.0"
+  universal_platform:
+    dependency: transitive
+    description:
+      name: universal_platform
+      sha256: "64e16458a0ea9b99260ceb5467a214c1f298d647c659af1bff6d3bf82536b1ec"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
+  uri_parser:
+    dependency: transitive
+    description:
+      name: uri_parser
+      sha256: "6543c9fd86d2862fac55d800a43e67c0dcd1a41677cb69c2f8edfe73bbcf1835"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.2"
   url_launcher:
     dependency: "direct main"
     description:

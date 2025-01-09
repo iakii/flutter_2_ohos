@@ -57,7 +57,8 @@ class _HomePageState extends State<HomePage> {
 
                 return AnnouncementBox(
                   message: context.l10n!.newAnnouncement,
-                  backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                  backgroundColor:
+                      Theme.of(context).colorScheme.secondaryContainer,
                   textColor: Theme.of(context).colorScheme.onSecondaryContainer,
                   url: _url,
                 );
@@ -96,7 +97,9 @@ class _HomePageState extends State<HomePage> {
   Widget _buildPlaylistSection(BuildContext context, List<dynamic> playlists) {
     final playlistHeight = MediaQuery.sizeOf(context).height * 0.25 / 1.1;
 
-    final itemsNumber = playlists.length > recommendedCubesNumber ? recommendedCubesNumber : playlists.length;
+    final itemsNumber = playlists.length > recommendedCubesNumber
+        ? recommendedCubesNumber
+        : playlists.length;
 
     return Column(
       children: [
@@ -190,11 +193,14 @@ class _HomePageState extends State<HomePage> {
   }) {
     final contentHeight = MediaQuery.sizeOf(context).height * 0.25;
 
-    final itemsNumber = data.length > recommendedCubesNumber ? recommendedCubesNumber : data.length;
+    final itemsNumber = data.length > recommendedCubesNumber
+        ? recommendedCubesNumber
+        : data.length;
 
     return Column(
       children: [
-        if (showArtists) _buildSectionHeader(title: context.l10n!.suggestedArtists),
+        if (showArtists)
+          _buildSectionHeader(title: context.l10n!.suggestedArtists),
         if (showArtists)
           ConstrainedBox(
             constraints: BoxConstraints(maxHeight: contentHeight),

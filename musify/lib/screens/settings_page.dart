@@ -104,7 +104,9 @@ class SettingsPage extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 25,
-                            backgroundColor: themeMode == ThemeMode.light ? color.withAlpha(150) : color,
+                            backgroundColor: themeMode == ThemeMode.light
+                                ? color.withAlpha(150)
+                                : color,
                           ),
                           if (isSelected)
                             Icon(
@@ -170,7 +172,8 @@ class SettingsPage extends StatelessWidget {
               FluentIcons.translate_24_filled,
               onTap: () {
                 final availableLanguages = appLanguages.keys.toList();
-                final activeLanguageCode = Localizations.localeOf(context).languageCode;
+                final activeLanguageCode =
+                    Localizations.localeOf(context).languageCode;
                 showCustomBottomSheet(
                   context,
                   ListView.builder(
@@ -211,7 +214,9 @@ class SettingsPage extends StatelessWidget {
                             },
                           );
                         },
-                        activeLanguageCode == languageCode ? activatedColor : inactivatedColor,
+                        activeLanguageCode == languageCode
+                            ? activatedColor
+                            : inactivatedColor,
                         borderRadius: borderRadius,
                       );
                     },
@@ -234,7 +239,8 @@ class SettingsPage extends StatelessWidget {
                     itemCount: availableQualities.length,
                     itemBuilder: (context, index) {
                       final quality = availableQualities[index];
-                      final isCurrentQuality = audioQualitySetting.value == quality;
+                      final isCurrentQuality =
+                          audioQualitySetting.value == quality;
 
                       final borderRadius = getItemBorderRadius(
                         index,
@@ -328,7 +334,9 @@ class SettingsPage extends StatelessWidget {
                           value,
                         );
                         predictiveBack.value = value;
-                        transitionsBuilder = value ? const PredictiveBackPageTransitionsBuilder() : const CupertinoPageTransitionsBuilder();
+                        transitionsBuilder = value
+                            ? const PredictiveBackPageTransitionsBuilder()
+                            : const CupertinoPageTransitionsBuilder();
                         Musify.updateAppState(context);
                         showToast(
                           context,
@@ -485,7 +493,8 @@ class SettingsPage extends StatelessWidget {
                         builder: (BuildContext context) {
                           return ConfirmationDialog(
                             submitMessage: context.l10n!.clear,
-                            confirmationMessage: context.l10n!.clearSearchHistoryQuestion,
+                            confirmationMessage:
+                                context.l10n!.clearSearchHistoryQuestion,
                             onCancel: () => {Navigator.of(context).pop()},
                             onSubmit: () => {
                               Navigator.of(context).pop(),
@@ -510,7 +519,8 @@ class SettingsPage extends StatelessWidget {
                         builder: (BuildContext context) {
                           return ConfirmationDialog(
                             submitMessage: context.l10n!.clear,
-                            confirmationMessage: context.l10n!.clearRecentlyPlayedQuestion,
+                            confirmationMessage:
+                                context.l10n!.clearRecentlyPlayedQuestion,
                             onCancel: () => {Navigator.of(context).pop()},
                             onSubmit: () => {
                               Navigator.of(context).pop(),
@@ -608,7 +618,8 @@ class SettingsPage extends StatelessWidget {
             CustomBar(
               '${context.l10n!.copyLogs} (${logger.getLogCount()})',
               FluentIcons.error_circle_24_filled,
-              onTap: () async => showToast(context, await logger.copyLogs(context)),
+              onTap: () async =>
+                  showToast(context, await logger.copyLogs(context)),
             ),
             CustomBar(
               context.l10n!.about,

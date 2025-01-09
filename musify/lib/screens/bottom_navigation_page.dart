@@ -75,7 +75,9 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
           ),
           NavigationBar(
             selectedIndex: _selectedIndex.value,
-            labelBehavior: ['en', 'zh'].contains(languageSetting.languageCode) ? NavigationDestinationLabelBehavior.onlyShowSelected : NavigationDestinationLabelBehavior.alwaysHide,
+            labelBehavior: ['en', 'zh'].contains(languageSetting.languageCode)
+                ? NavigationDestinationLabelBehavior.onlyShowSelected
+                : NavigationDestinationLabelBehavior.alwaysHide,
             onDestinationSelected: (index) {
               widget.child.goBranch(
                 index,

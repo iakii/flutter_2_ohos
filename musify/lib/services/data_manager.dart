@@ -112,7 +112,8 @@ Future<String> backupData(BuildContext context) async {
 
 Future<String> restoreData(BuildContext context) async {
   final boxNames = ['user', 'settings'];
-  final backupFiles = await FilePicker.platform.pickFiles(allowMultiple: true).catchError(
+  final backupFiles =
+      await FilePicker.platform.pickFiles(allowMultiple: true).catchError(
     (e, stackTrace) {
       logger.log('${context.l10n!.restoreError}:', e, stackTrace);
       return null;

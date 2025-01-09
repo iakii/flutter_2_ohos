@@ -24,12 +24,14 @@ import 'dart:async';
 import 'package:audio_service/audio_service.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:just_audio_media_kit/just_audio_media_kit.dart';
 import 'package:musify/services/audio_service.dart';
 import 'package:musify/services/data_manager.dart';
 import 'package:musify/services/logger_service.dart';
@@ -37,6 +39,7 @@ import 'package:musify/services/router_service.dart';
 import 'package:musify/services/settings_manager.dart';
 import 'package:musify/services/update_manager.dart';
 import 'package:musify/style/app_themes.dart';
+import 'package:musify/utilities/proxy.dart';
 import 'package:path_provider/path_provider.dart';
 
 late MusifyAudioHandler audioHandler;
@@ -67,7 +70,19 @@ final appLanguages = <String, String>{
   'Ukrainian': 'uk',
 };
 
-final appSupportedLocales = appLanguages.values.map((languageCode) => Locale.fromSubtags(languageCode: languageCode)).toList();
+final appSupportedLocales = appLanguages.values
+    .map((languageCode) => Locale.fromSubtags(languageCode: languageCode))
+    .toList();
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.trackpad,
+      };
+}
 
 class Musify extends StatefulWidget {
   const Musify({super.key});
@@ -107,7 +122,8 @@ class _MusifyState extends State<Musify> {
         languageSetting = newLocale;
       }
       if (newAccentColor != null) {
-        if (systemColorStatus != null && useSystemColor.value != systemColorStatus) {
+        if (systemColorStatus != null &&
+            useSystemColor.value != systemColorStatus) {
           useSystemColor.value = systemColorStatus;
           addOrUpdateData(
             'settings',
@@ -141,14 +157,18 @@ class _MusifyState extends State<Musify> {
 
     try {
       LicenseRegistry.addLicense(() async* {
-        final license = await rootBundle.loadString('assets/licenses/paytone.txt');
+        final license =
+            await rootBundle.loadString('assets/licenses/paytone.txt');
         yield LicenseEntryWithLineBreaks(['paytoneOne'], license);
       });
     } catch (e, stackTrace) {
       logger.log('License Registration Error', e, stackTrace);
     }
 
-    if (!isFdroidBuild && !isUpdateChecked && !offlineMode.value && kReleaseMode) {
+    if (!isFdroidBuild &&
+        !isUpdateChecked &&
+        !offlineMode.value &&
+        kReleaseMode) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         checkAppUpdates();
         isUpdateChecked = true;
@@ -166,10 +186,12 @@ class _MusifyState extends State<Musify> {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (lightColorScheme, darkColorScheme) {
-        final colorScheme = getAppColorScheme(lightColorScheme, darkColorScheme);
+        final colorScheme =
+            getAppColorScheme(lightColorScheme, darkColorScheme);
 
         return MaterialApp.router(
           themeMode: themeMode,
+          scrollBehavior: MyCustomScrollBehavior(),
           darkTheme: getAppTheme(colorScheme),
           theme: getAppTheme(colorScheme),
           localizationsDelegates: const [
@@ -189,7 +211,23 @@ class _MusifyState extends State<Musify> {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  JustAudioMediaKit.ensureInitialized(
+    android: true, // default: false - dependency: media_kit_libs_android_audio
+    iOS: true, // default: false - dependency: media_kit_libs_ios_audio
+    macOS: true, // default: false - dependency: media_kit_libs_macos_audio
+  );
+  JustAudioMediaKit.bufferSize = 12 * 1024 * 1024;
+  JustAudioMediaKit.prefetchPlaylist = false;
+  JustAudioMediaKit.pitch = true;
+  JustAudioMediaKit.protocolWhitelist = const [
+    ...['udp', 'rtp', 'tcp', 'tls', 'data', 'file', 'http', 'https', 'crypto'],
+  ];
+
+  // JustAudioMediaKit.mpvLogLevel = MPVLogLevel.debug;
   await initialisation();
+
+  ProxyClient.toggle();
 
   runApp(const Musify());
 }

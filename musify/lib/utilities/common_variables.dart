@@ -32,13 +32,11 @@ var commonBarTitleStyle = const TextStyle(
 );
 
 const commonCustomBarRadius = BorderRadius.all(Radius.circular(18));
-const commonCustomBarRadiusFirst =
-    BorderRadius.vertical(top: Radius.circular(18));
+const commonCustomBarRadiusFirst = BorderRadius.vertical(top: Radius.circular(18));
 const commonCustomBarRadiusLast = BorderRadius.vertical(
   bottom: Radius.circular(18),
 );
 
 const commonListViewBottmomPadding = EdgeInsets.only(bottom: 8);
 
-const commonBarContentPadding =
-    EdgeInsets.symmetric(vertical: 12, horizontal: 8);
+const commonBarContentPadding = EdgeInsets.symmetric(vertical: 12, horizontal: 8);

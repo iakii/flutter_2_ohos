@@ -23,11 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Dart imports:
 import 'dart:math';
 import 'dart:ui';
 
-// Flutter imports:
 import 'package:flutter/material.dart';
 
 /// A squiggly Variant of the default [Slider] track.
@@ -61,8 +59,7 @@ import 'package:flutter/material.dart';
 ///  * [SliderTrackShape], which can be used to create custom shapes for the
 ///    [Slider]'s track.
 ///  * [RoundedRectSliderTrackShape], for a similar track (the default for the normal [Slider]).
-class SquigglySliderTrackShape extends SliderTrackShape
-    with BaseSliderTrackShape {
+class SquigglySliderTrackShape extends SliderTrackShape with BaseSliderTrackShape {
   /// Create a slider track that draws two rectangles with rounded outer edges.
   const SquigglySliderTrackShape({
     this.squiggleAmplitude = 0.0,
@@ -110,10 +107,8 @@ class SquigglySliderTrackShape extends SliderTrackShape
       begin: sliderTheme.disabledInactiveTrackColor,
       end: sliderTheme.inactiveTrackColor,
     );
-    final activePaint = Paint()
-      ..color = activeTrackColorTween.evaluate(enableAnimation)!;
-    final inactivePaint = Paint()
-      ..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
+    final activePaint = Paint()..color = activeTrackColorTween.evaluate(enableAnimation)!;
+    final inactivePaint = Paint()..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
     final Paint leftTrackPaint;
     final Paint rightTrackPaint;
     switch (textDirection) {
@@ -135,17 +130,12 @@ class SquigglySliderTrackShape extends SliderTrackShape
       isDiscrete: isDiscrete,
     );
     final trackRadius = Radius.circular(trackRect.height / 2);
-    final activeTrackRadius =
-        Radius.circular((trackRect.height + additionalActiveTrackHeight) / 2);
+    final activeTrackRadius = Radius.circular((trackRect.height + additionalActiveTrackHeight) / 2);
 
     final ll = trackRect.left;
-    final lt = (textDirection == TextDirection.ltr)
-        ? trackRect.top - (additionalActiveTrackHeight / 2)
-        : trackRect.top;
+    final lt = (textDirection == TextDirection.ltr) ? trackRect.top - (additionalActiveTrackHeight / 2) : trackRect.top;
     final lr = thumbCenter.dx;
-    final lb = (textDirection == TextDirection.ltr)
-        ? trackRect.bottom + (additionalActiveTrackHeight / 2)
-        : trackRect.bottom;
+    final lb = (textDirection == TextDirection.ltr) ? trackRect.bottom + (additionalActiveTrackHeight / 2) : trackRect.bottom;
 
     if (squiggleAmplitude == 0) {
       context.canvas.drawRRect(
@@ -154,12 +144,8 @@ class SquigglySliderTrackShape extends SliderTrackShape
           lt,
           lr,
           lb,
-          topLeft: (textDirection == TextDirection.ltr)
-              ? activeTrackRadius
-              : trackRadius,
-          bottomLeft: (textDirection == TextDirection.ltr)
-              ? activeTrackRadius
-              : trackRadius,
+          topLeft: (textDirection == TextDirection.ltr) ? activeTrackRadius : trackRadius,
+          bottomLeft: (textDirection == TextDirection.ltr) ? activeTrackRadius : trackRadius,
         ),
         leftTrackPaint,
       );
@@ -183,10 +169,7 @@ class SquigglySliderTrackShape extends SliderTrackShape
                     : 1);
             return Offset(
               x,
-              heightCenter +
-                  (sin(x / squiggleWavelength + phase * 2 * pi) *
-                          squiggleAmplitude) *
-                      easeFactor,
+              heightCenter + (sin(x / squiggleWavelength + phase * 2 * pi) * squiggleAmplitude) * easeFactor,
             );
           },
         ),
@@ -200,35 +183,23 @@ class SquigglySliderTrackShape extends SliderTrackShape
     context.canvas.drawRRect(
       RRect.fromLTRBAndCorners(
         thumbCenter.dx,
-        (textDirection == TextDirection.rtl)
-            ? trackRect.top - (additionalActiveTrackHeight / 2)
-            : trackRect.top,
+        (textDirection == TextDirection.rtl) ? trackRect.top - (additionalActiveTrackHeight / 2) : trackRect.top,
         trackRect.right,
-        (textDirection == TextDirection.rtl)
-            ? trackRect.bottom + (additionalActiveTrackHeight / 2)
-            : trackRect.bottom,
-        topRight: (textDirection == TextDirection.rtl)
-            ? activeTrackRadius
-            : trackRadius,
-        bottomRight: (textDirection == TextDirection.rtl)
-            ? activeTrackRadius
-            : trackRadius,
+        (textDirection == TextDirection.rtl) ? trackRect.bottom + (additionalActiveTrackHeight / 2) : trackRect.bottom,
+        topRight: (textDirection == TextDirection.rtl) ? activeTrackRadius : trackRadius,
+        bottomRight: (textDirection == TextDirection.rtl) ? activeTrackRadius : trackRadius,
       ),
       rightTrackPaint,
     );
 
-    final showSecondaryTrack = (secondaryOffset != null) &&
-        ((textDirection == TextDirection.ltr)
-            ? (secondaryOffset.dx > thumbCenter.dx)
-            : (secondaryOffset.dx < thumbCenter.dx));
+    final showSecondaryTrack = (secondaryOffset != null) && ((textDirection == TextDirection.ltr) ? (secondaryOffset.dx > thumbCenter.dx) : (secondaryOffset.dx < thumbCenter.dx));
 
     if (showSecondaryTrack) {
       final secondaryTrackColorTween = ColorTween(
         begin: sliderTheme.disabledSecondaryActiveTrackColor,
         end: sliderTheme.secondaryActiveTrackColor,
       );
-      final secondaryTrackPaint = Paint()
-        ..color = secondaryTrackColorTween.evaluate(enableAnimation)!;
+      final secondaryTrackPaint = Paint()..color = secondaryTrackColorTween.evaluate(enableAnimation)!;
       if (textDirection == TextDirection.ltr) {
         context.canvas.drawRRect(
           RRect.fromLTRBAndCorners(

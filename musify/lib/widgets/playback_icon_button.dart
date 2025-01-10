@@ -19,13 +19,11 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:audio_service/audio_service.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-
+// Flutter imports:
+import 'package:flutter/material.dart';
 // Project imports:
 import 'package:musify/main.dart';
 
@@ -74,9 +72,7 @@ _IconDataAndAction getIconFromState(
       );
     default:
       return _IconDataAndAction(
-        iconData: isPlaying
-            ? FluentIcons.pause_24_filled
-            : FluentIcons.play_24_filled,
+        iconData: isPlaying ? FluentIcons.pause_24_filled : FluentIcons.play_24_filled,
         onPressed: isPlaying ? audioHandler.pause : audioHandler.play,
       );
   }

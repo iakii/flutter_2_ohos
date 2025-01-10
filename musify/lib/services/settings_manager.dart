@@ -19,13 +19,11 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:audio_service/audio_service.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 // Project imports:
 import 'package:musify/main.dart';
 
@@ -68,22 +66,17 @@ final audioQualitySetting = ValueNotifier<String>(
 );
 
 Locale languageSetting = Locale(
-  appLanguages[Hive.box('settings').get('language', defaultValue: 'English')
-          as String] ??
-      'en',
+  appLanguages[Hive.box('settings').get('language', defaultValue: 'English') as String] ?? 'en',
 );
 
-final themeModeSetting =
-    Hive.box('settings').get('themeMode', defaultValue: 'dark') as String;
+final themeModeSetting = Hive.box('settings').get('themeMode', defaultValue: 'dark') as String;
 
-Color primaryColorSetting =
-    Color(Hive.box('settings').get('accentColor', defaultValue: 0xff91cef4));
+Color primaryColorSetting = Color(Hive.box('settings').get('accentColor', defaultValue: 0xff91cef4));
 
 // Non-Storage Notifiers
 
 final shuffleNotifier = ValueNotifier<bool>(false);
-final repeatNotifier =
-    ValueNotifier<AudioServiceRepeatMode>(AudioServiceRepeatMode.none);
+final repeatNotifier = ValueNotifier<AudioServiceRepeatMode>(AudioServiceRepeatMode.none);
 
 // Server-Notifiers
 

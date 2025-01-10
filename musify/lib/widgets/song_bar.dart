@@ -22,13 +22,11 @@
 // Dart imports:
 import 'dart:io';
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-
+// Flutter imports:
+import 'package:flutter/material.dart';
 // Project imports:
 import 'package:musify/API/musify.dart';
 import 'package:musify/extensions/l10n.dart';
@@ -180,20 +178,15 @@ class SongBar extends StatelessWidget {
             child: ClipRRect(
               borderRadius: commonBarRadius,
               child: Image(
-                color: isDurationAvailable
-                    ? Theme.of(context).colorScheme.primaryContainer
-                    : null,
+                color: isDurationAvailable ? Theme.of(context).colorScheme.primaryContainer : null,
                 colorBlendMode: isDurationAvailable ? BlendMode.multiply : null,
-                opacity: isDurationAvailable
-                    ? const AlwaysStoppedAnimation(0.45)
-                    : null,
+                opacity: isDurationAvailable ? const AlwaysStoppedAnimation(0.45) : null,
                 image: imageProvider,
                 centerSlice: const Rect.fromLTRB(1, 1, 1, 1),
               ),
             ),
           ),
-          errorWidget: (context, url, error) =>
-              const NullArtworkWidget(iconSize: 30),
+          errorWidget: (context, url, error) => const NullArtworkWidget(iconSize: 30),
         ),
         if (isDurationAvailable)
           SizedBox(
@@ -214,10 +207,8 @@ class SongBar extends StatelessWidget {
   }
 
   Widget _buildActionButtons(BuildContext context, Color primaryColor) {
-    final songLikeStatus =
-        ValueNotifier<bool>(isSongAlreadyLiked(song['ytid']));
-    final songOfflineStatus =
-        ValueNotifier<bool>(isSongAlreadyOffline(song['ytid']));
+    final songLikeStatus = ValueNotifier<bool>(isSongAlreadyLiked(song['ytid']));
+    final songOfflineStatus = ValueNotifier<bool>(isSongAlreadyOffline(song['ytid']));
 
     return PopupMenuButton<String>(
       shape: RoundedRectangleBorder(
@@ -237,9 +228,7 @@ class SongBar extends StatelessWidget {
               songLikeStatus.value,
             );
             final likedSongsLength = currentLikedSongsLength.value;
-            currentLikedSongsLength.value = songLikeStatus.value
-                ? likedSongsLength + 1
-                : likedSongsLength - 1;
+            currentLikedSongsLength.value = songLikeStatus.value ? likedSongsLength + 1 : likedSongsLength - 1;
             break;
           case 'remove':
             if (onRemove != null) onRemove!();
@@ -272,9 +261,7 @@ class SongBar extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      value
-                          ? context.l10n!.removeFromLikedSongs
-                          : context.l10n!.addToLikedSongs,
+                      value ? context.l10n!.removeFromLikedSongs : context.l10n!.addToLikedSongs,
                     ),
                   ],
                 );
@@ -310,16 +297,12 @@ class SongBar extends StatelessWidget {
                 return Row(
                   children: [
                     Icon(
-                      value
-                          ? FluentIcons.cellular_off_24_regular
-                          : FluentIcons.cellular_data_1_24_regular,
+                      value ? FluentIcons.cellular_off_24_regular : FluentIcons.cellular_data_1_24_regular,
                       color: primaryColor,
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      value
-                          ? context.l10n!.removeOffline
-                          : context.l10n!.makeOffline,
+                      value ? context.l10n!.removeOffline : context.l10n!.makeOffline,
                     ),
                   ],
                 );

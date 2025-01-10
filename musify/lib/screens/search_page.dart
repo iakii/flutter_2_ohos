@@ -19,13 +19,11 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 // Project imports:
 import 'package:musify/API/musify.dart';
 import 'package:musify/extensions/l10n.dart';
@@ -140,20 +138,14 @@ class _SearchPageState extends State<SearchPage> {
                 padding: const EdgeInsets.all(7),
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: _suggestionsList.isEmpty
-                    ? searchHistory.length
-                    : _suggestionsList.length,
+                itemCount: _suggestionsList.isEmpty ? searchHistory.length : _suggestionsList.length,
                 itemBuilder: (BuildContext context, int index) {
                   final suggestionsNotAvailable = _suggestionsList.isEmpty;
-                  final query = suggestionsNotAvailable
-                      ? searchHistory[index]
-                      : _suggestionsList[index];
+                  final query = suggestionsNotAvailable ? searchHistory[index] : _suggestionsList[index];
 
                   final borderRadius = getItemBorderRadius(
                     index,
-                    _suggestionsList.isEmpty
-                        ? searchHistory.length
-                        : _suggestionsList.length,
+                    _suggestionsList.isEmpty ? searchHistory.length : _suggestionsList.length,
                   );
 
                   return CustomBar(
@@ -166,8 +158,7 @@ class _SearchPageState extends State<SearchPage> {
                       _inputNode.unfocus();
                     },
                     onLongPress: () async {
-                      final confirm =
-                          await _showConfirmationDialog(context) ?? false;
+                      final confirm = await _showConfirmationDialog(context) ?? false;
 
                       if (confirm) {
                         setState(() {
@@ -192,15 +183,11 @@ class _SearchPageState extends State<SearchPage> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(7),
-                    itemCount: _songsSearchResult.length > maxSongsInList
-                        ? maxSongsInList
-                        : _songsSearchResult.length,
+                    itemCount: _songsSearchResult.length > maxSongsInList ? maxSongsInList : _songsSearchResult.length,
                     itemBuilder: (BuildContext context, int index) {
                       final borderRadius = getItemBorderRadius(
                         index,
-                        _songsSearchResult.length > maxSongsInList
-                            ? maxSongsInList
-                            : _songsSearchResult.length,
+                        _songsSearchResult.length > maxSongsInList ? maxSongsInList : _songsSearchResult.length,
                       );
 
                       return SongBar(
@@ -211,23 +198,18 @@ class _SearchPageState extends State<SearchPage> {
                       );
                     },
                   ),
-                  if (_albumsSearchResult.isNotEmpty)
-                    SectionTitle(context.l10n!.albums, primaryColor),
+                  if (_albumsSearchResult.isNotEmpty) SectionTitle(context.l10n!.albums, primaryColor),
                   if (_albumsSearchResult.isNotEmpty)
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: _albumsSearchResult.length > maxSongsInList
-                          ? maxSongsInList
-                          : _albumsSearchResult.length,
+                      itemCount: _albumsSearchResult.length > maxSongsInList ? maxSongsInList : _albumsSearchResult.length,
                       itemBuilder: (BuildContext context, int index) {
                         final playlist = _albumsSearchResult[index];
 
                         final borderRadius = getItemBorderRadius(
                           index,
-                          _albumsSearchResult.length > maxSongsInList
-                              ? maxSongsInList
-                              : _albumsSearchResult.length,
+                          _albumsSearchResult.length > maxSongsInList ? maxSongsInList : _albumsSearchResult.length,
                         );
 
                         return PlaylistBar(
@@ -241,16 +223,13 @@ class _SearchPageState extends State<SearchPage> {
                         );
                       },
                     ),
-                  if (_playlistsSearchResult.isNotEmpty)
-                    SectionTitle(context.l10n!.playlists, primaryColor),
+                  if (_playlistsSearchResult.isNotEmpty) SectionTitle(context.l10n!.playlists, primaryColor),
                   if (_playlistsSearchResult.isNotEmpty)
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       padding: commonListViewBottmomPadding,
-                      itemCount: _playlistsSearchResult.length > maxSongsInList
-                          ? maxSongsInList
-                          : _playlistsSearchResult.length,
+                      itemCount: _playlistsSearchResult.length > maxSongsInList ? maxSongsInList : _playlistsSearchResult.length,
                       itemBuilder: (BuildContext context, int index) {
                         final playlist = _playlistsSearchResult[index];
                         return PlaylistBar(

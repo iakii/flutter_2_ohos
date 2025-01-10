@@ -26,13 +26,9 @@ import 'dart:io';
 
 // Flutter imports:
 import 'package:flutter/widgets.dart';
-
 // Package imports:
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
-
 // Project imports:
 import 'package:musify/DB/albums.db.dart';
 import 'package:musify/DB/playlists.db.dart';
@@ -43,6 +39,8 @@ import 'package:musify/services/lyrics_manager.dart';
 import 'package:musify/services/settings_manager.dart';
 import 'package:musify/utilities/flutter_toast.dart';
 import 'package:musify/utilities/formatter.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 final _yt = YoutubeExplode();
 
@@ -50,15 +48,11 @@ List globalSongs = [];
 
 List playlists = [...playlistsDB, ...albumsDB];
 List userPlaylists = Hive.box('user').get('playlists', defaultValue: []);
-List userCustomPlaylists =
-    Hive.box('user').get('customPlaylists', defaultValue: []);
+List userCustomPlaylists = Hive.box('user').get('customPlaylists', defaultValue: []);
 List userLikedSongsList = Hive.box('user').get('likedSongs', defaultValue: []);
-List userLikedPlaylists =
-    Hive.box('user').get('likedPlaylists', defaultValue: []);
-List userRecentlyPlayed =
-    Hive.box('user').get('recentlyPlayedSongs', defaultValue: []);
-List userOfflineSongs =
-    Hive.box('userNoBackup').get('offlineSongs', defaultValue: []);
+List userLikedPlaylists = Hive.box('user').get('likedPlaylists', defaultValue: []);
+List userRecentlyPlayed = Hive.box('user').get('recentlyPlayedSongs', defaultValue: []);
+List userOfflineSongs = Hive.box('userNoBackup').get('offlineSongs', defaultValue: []);
 List suggestedPlaylists = [];
 List onlinePlaylists = [];
 Map activePlaylist = {
@@ -72,11 +66,9 @@ Map activePlaylist = {
 dynamic nextRecommendedSong;
 
 final currentLikedSongsLength = ValueNotifier<int>(userLikedSongsList.length);
-final currentLikedPlaylistsLength =
-    ValueNotifier<int>(userLikedPlaylists.length);
+final currentLikedPlaylistsLength = ValueNotifier<int>(userLikedPlaylists.length);
 final currentOfflineSongsLength = ValueNotifier<int>(userOfflineSongs.length);
-final currentRecentlyPlayedLength =
-    ValueNotifier<int>(userRecentlyPlayed.length);
+final currentRecentlyPlayedLength = ValueNotifier<int>(userRecentlyPlayed.length);
 
 final lyrics = ValueNotifier<String?>(null);
 String? lastFetchedLyrics;
@@ -101,8 +93,7 @@ Future<List> getRecommendedSongs() async {
       for (var i = 0; i < 3; i++) {
         final song = await _yt.videos.get(userRecentlyPlayed[i]['ytid']);
         final relatedSongs = await _yt.videos.getRelatedVideos(song) ?? [];
-        playlistSongs
-            .addAll(relatedSongs.take(3).map((s) => returnSongLayout(0, s)));
+        playlistSongs.addAll(relatedSongs.take(3).map((s) => returnSongLayout(0, s)));
       }
       playlistSongs.shuffle();
       return playlistSongs;
@@ -202,9 +193,7 @@ Future<String> addUserPlaylist(String input, BuildContext context) async {
       return '${context.l10n!.playlistAlreadyExists}!';
     }
 
-    if (_playlist.title.isEmpty &&
-        _playlist.author.isEmpty &&
-        _playlist.videoCount == null) {
+    if (_playlist.title.isEmpty && _playlist.author.isEmpty && _playlist.videoCount == null) {
       return '${context.l10n!.invalidYouTubePlaylist}!';
     }
 
@@ -245,13 +234,10 @@ String addSongInCustomPlaylist(
 
   if (customPlaylist != null) {
     final List<dynamic> playlistSongs = customPlaylist['list'];
-    if (playlistSongs
-        .any((playlistElement) => playlistElement['ytid'] == song['ytid'])) {
+    if (playlistSongs.any((playlistElement) => playlistElement['ytid'] == song['ytid'])) {
       return context.l10n!.songAlreadyInPlaylist;
     }
-    indexToInsert != null
-        ? playlistSongs.insert(indexToInsert, song)
-        : playlistSongs.add(song);
+    indexToInsert != null ? playlistSongs.insert(indexToInsert, song) : playlistSongs.add(song);
     addOrUpdateData('user', 'customPlaylists', userCustomPlaylists);
     return context.l10n!.songAdded;
   } else {
@@ -307,8 +293,7 @@ void removeUserCustomPlaylist(dynamic playlist) {
 
 Future<void> updateSongLikeStatus(dynamic songId, bool add) async {
   if (add) {
-    userLikedSongsList
-        .add(await getSongDetails(userLikedSongsList.length, songId));
+    userLikedSongsList.add(await getSongDetails(userLikedSongsList.length, songId));
   } else {
     userLikedSongsList.removeWhere((song) => song['ytid'] == songId);
   }
@@ -341,8 +326,7 @@ Future<void> updatePlaylistLikeStatus(
         userLikedPlaylists.add(await getPlaylistInfoForWidget(playlistId));
       }
     } else {
-      userLikedPlaylists
-          .removeWhere((playlist) => playlist['ytid'] == playlistId);
+      userLikedPlaylists.removeWhere((playlist) => playlist['ytid'] == playlistId);
     }
 
     addOrUpdateData('user', 'likedPlaylists', userLikedPlaylists);
@@ -351,14 +335,11 @@ Future<void> updatePlaylistLikeStatus(
   }
 }
 
-bool isSongAlreadyLiked(songIdToCheck) =>
-    userLikedSongsList.any((song) => song['ytid'] == songIdToCheck);
+bool isSongAlreadyLiked(songIdToCheck) => userLikedSongsList.any((song) => song['ytid'] == songIdToCheck);
 
-bool isPlaylistAlreadyLiked(playlistIdToCheck) =>
-    userLikedPlaylists.any((playlist) => playlist['ytid'] == playlistIdToCheck);
+bool isPlaylistAlreadyLiked(playlistIdToCheck) => userLikedPlaylists.any((playlist) => playlist['ytid'] == playlistIdToCheck);
 
-bool isSongAlreadyOffline(songIdToCheck) =>
-    userOfflineSongs.any((song) => song['ytid'] == songIdToCheck);
+bool isSongAlreadyOffline(songIdToCheck) => userOfflineSongs.any((song) => song['ytid'] == songIdToCheck);
 
 Future<List> getPlaylists({
   String? query,
@@ -367,8 +348,7 @@ Future<List> getPlaylists({
   String type = 'all',
 }) async {
   // Early exit if playlists or suggestedPlaylists is empty
-  if (playlists.isEmpty ||
-      (playlistsNum == null && query == null && suggestedPlaylists.isEmpty)) {
+  if (playlists.isEmpty || (playlistsNum == null && query == null && suggestedPlaylists.isEmpty)) {
     return [];
   }
 
@@ -377,10 +357,7 @@ Future<List> getPlaylists({
     final lowercaseQuery = query.toLowerCase();
     final filteredPlaylists = playlists.where((playlist) {
       final lowercaseTitle = playlist['title'].toLowerCase();
-      return lowercaseTitle.contains(lowercaseQuery) &&
-          ((type == 'all') ||
-              (type == 'album' && playlist['isAlbum'] == true) ||
-              (type == 'playlist' && playlist['isAlbum'] != true));
+      return lowercaseTitle.contains(lowercaseQuery) && ((type == 'all') || (type == 'album' && playlist['isAlbum'] == true) || (type == 'playlist' && playlist['isAlbum'] != true));
     }).toList();
 
     final searchResults = await _yt.search.searchContent(
@@ -388,8 +365,7 @@ Future<List> getPlaylists({
       filter: TypeFilters.playlist,
     );
 
-    final existingYtid =
-        onlinePlaylists.map((playlist) => playlist['ytid'] as String).toSet();
+    final existingYtid = onlinePlaylists.map((playlist) => playlist['ytid'] as String).toSet();
 
     final newPlaylists = searchResults
         .whereType<SearchPlaylist>()
@@ -437,9 +413,7 @@ Future<List> getPlaylists({
   if (type != 'all') {
     return playlists
         .where(
-          (playlist) =>
-              (type == 'album' && playlist['isAlbum'] == true) ||
-              (type == 'playlist' && playlist['isAlbum'] != true),
+          (playlist) => (type == 'album' && playlist['isAlbum'] == true) || (type == 'playlist' && playlist['isAlbum'] != true),
         )
         .toList();
   }
@@ -585,8 +559,7 @@ Future<Map?> getPlaylistInfoForWidget(
   bool isArtist = false,
 }) async {
   if (!isArtist) {
-    Map? playlist =
-        playlists.firstWhere((list) => list['ytid'] == id, orElse: () => null);
+    Map? playlist = playlists.firstWhere((list) => list['ytid'] == id, orElse: () => null);
 
     if (playlist == null) {
       final usPlaylists = await getUserPlaylists();
@@ -622,8 +595,7 @@ Future<Map?> getPlaylistInfoForWidget(
 
 Future<AudioOnlyStreamInfo> getSongManifest(String songId) async {
   try {
-    final manifest = await _yt.videos.streamsClient
-        .getManifest(songId, requireWatchPage: false);
+    final manifest = await _yt.videos.streamsClient.getManifest(songId, requireWatchPage: false);
     final audioStream = manifest.audioOnly.withHighestBitrate();
     return audioStream;
   } catch (e, stackTrace) {
@@ -667,8 +639,7 @@ Future<String> getSong(String songId, bool isLive) async {
 }
 
 Future<String> getLiveStreamUrl(String songId) async {
-  final streamInfo =
-      await _yt.videos.streamsClient.getHttpLiveStreamUrl(VideoId(songId));
+  final streamInfo = await _yt.videos.streamsClient.getHttpLiveStreamUrl(VideoId(songId));
   return streamInfo;
 }
 
@@ -676,8 +647,7 @@ Future<String> getAudioUrl(
   String songId,
   String cacheKey,
 ) async {
-  final manifest = await _yt.videos.streamsClient
-      .getManifest(songId, requireWatchPage: false);
+  final manifest = await _yt.videos.streamsClient.getManifest(songId, requireWatchPage: false);
   final audioQuality = selectAudioQuality(manifest.audioOnly.sortByBitrate());
   final audioUrl = audioQuality.url.toString();
 
@@ -802,8 +772,7 @@ Future<File?> _downloadAndSaveArtworkFile(String url, String filePath) async {
 const recentlyPlayedSongsLimit = 50;
 
 Future<void> updateRecentlyPlayed(dynamic songId) async {
-  if (userRecentlyPlayed.length == 1 && userRecentlyPlayed[0]['ytid'] == songId)
-    return;
+  if (userRecentlyPlayed.length == 1 && userRecentlyPlayed[0]['ytid'] == songId) return;
   if (userRecentlyPlayed.length >= recentlyPlayedSongsLimit) {
     userRecentlyPlayed.removeLast();
   }
@@ -811,8 +780,7 @@ Future<void> updateRecentlyPlayed(dynamic songId) async {
   userRecentlyPlayed.removeWhere((song) => song['ytid'] == songId);
   currentRecentlyPlayedLength.value = userRecentlyPlayed.length;
 
-  final newSongDetails =
-      await getSongDetails(userRecentlyPlayed.length, songId);
+  final newSongDetails = await getSongDetails(userRecentlyPlayed.length, songId);
 
   userRecentlyPlayed.insert(0, newSongDetails);
   currentRecentlyPlayedLength.value = userRecentlyPlayed.length;

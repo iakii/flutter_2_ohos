@@ -22,13 +22,11 @@
 // Dart imports:
 import 'dart:io';
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:file_picker_ohos/file_picker_ohos.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-
 // Project imports:
 import 'package:musify/extensions/l10n.dart';
 import 'package:musify/main.dart';
@@ -118,12 +116,8 @@ Future<String> backupData(BuildContext context) async {
 
 Future<String> restoreData(BuildContext context) async {
   final boxNames = ['user', 'settings'];
-  final backupFiles =
-      await FilePicker.platform.pickFiles(allowMultiple: true).catchError(
-    (e, stackTrace) {
-      logger.log('${context.l10n!.restoreError}:', e, stackTrace);
-      return null;
-    },
+  final backupFiles = await FilePicker.platform.pickFiles(
+    allowMultiple: true,
   );
 
   if (backupFiles == null || backupFiles.files.isEmpty) {

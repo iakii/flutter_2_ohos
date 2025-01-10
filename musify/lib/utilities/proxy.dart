@@ -8,14 +8,14 @@ class ProxyClient extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     final client = super.createHttpClient(context);
-    // print("设置代理==========================");
+    // ignore: avoid_print
+    print('设置代理==========================');
     // ignore: cascade_invocations
     client
       ..findProxy = (url) {
         return 'PROXY $proxyAddress';
       }
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true; // 忽略证书错误
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true; // 忽略证书错误
     return client;
   }
 

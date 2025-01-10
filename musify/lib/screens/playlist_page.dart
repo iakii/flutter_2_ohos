@@ -22,12 +22,10 @@
 // Dart imports:
 import 'dart:math';
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-
+// Flutter imports:
+import 'package:flutter/material.dart';
 // Project imports:
 import 'package:musify/API/musify.dart';
 import 'package:musify/extensions/l10n.dart';
@@ -68,8 +66,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
   final int _itemsPerPage = 35;
   var _currentPage = 0;
   var _currentLastLoadedId = 0;
-  late final playlistLikeStatus =
-      ValueNotifier<bool>(isPlaylistAlreadyLiked(widget.playlistId));
+  late final playlistLikeStatus = ValueNotifier<bool>(isPlaylistAlreadyLiked(widget.playlistId));
 
   @override
   void initState() {
@@ -125,8 +122,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () =>
-              Navigator.pop(context, widget.playlistData == _playlist),
+          onPressed: () => Navigator.pop(context, widget.playlistData == _playlist),
         ),
         actions: [
           if (widget.playlistId != null) ...[
@@ -166,12 +162,10 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        final isRemovable =
-                            _playlist['source'] == 'user-created';
+                        final isRemovable = _playlist['source'] == 'user-created';
                         return _buildSongListItem(index, isRemovable);
                       },
-                      childCount:
-                          _hasMore ? _songsList.length + 1 : _songsList.length,
+                      childCount: _hasMore ? _songsList.length + 1 : _songsList.length,
                     ),
                   ),
                 ),
@@ -209,9 +203,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
         return IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
-          icon: value
-              ? const Icon(FluentIcons.heart_24_filled)
-              : const Icon(FluentIcons.heart_24_regular),
+          icon: value ? const Icon(FluentIcons.heart_24_filled) : const Icon(FluentIcons.heart_24_regular),
           iconSize: 26,
           onPressed: () {
             playlistLikeStatus.value = !playlistLikeStatus.value;
@@ -219,9 +211,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
               _playlist['ytid'],
               playlistLikeStatus.value,
             );
-            currentLikedPlaylistsLength.value = value
-                ? currentLikedPlaylistsLength.value + 1
-                : currentLikedPlaylistsLength.value - 1;
+            currentLikedPlaylistsLength.value = value ? currentLikedPlaylistsLength.value + 1 : currentLikedPlaylistsLength.value - 1;
           },
         );
       },
@@ -284,8 +274,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    final index =
-                        userCustomPlaylists.indexOf(widget.playlistData);
+                    final index = userCustomPlaylists.indexOf(widget.playlistData);
 
                     if (index != -1) {
                       final newPlaylist = {
@@ -385,8 +374,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
       elevation: 0,
       iconSize: 25,
       icon: const Icon(FluentIcons.filter_16_filled),
-      items: <String>[context.l10n!.name, context.l10n!.artist]
-          .map((String value) {
+      items: <String>[context.l10n!.name, context.l10n!.artist].map((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),

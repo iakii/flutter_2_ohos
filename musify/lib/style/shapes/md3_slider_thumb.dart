@@ -78,10 +78,8 @@ class Material3SliderThumb extends SliderComponentShape {
       end: pressedElevation,
     ).evaluate(activationAnimation);
 
-    final thumbRect =
-        Rect.fromCenter(center: center, width: thumbWidth, height: thumbHeight);
-    final thumbRRect =
-        RRect.fromRectAndRadius(thumbRect, const Radius.circular(4));
+    final thumbRect = Rect.fromCenter(center: center, width: thumbWidth, height: thumbHeight);
+    final thumbRRect = RRect.fromRectAndRadius(thumbRect, const Radius.circular(4));
 
     if (evaluatedElevation > 0.0) {
       canvas.drawShadow(
@@ -97,8 +95,7 @@ class Material3SliderThumb extends SliderComponentShape {
       width: thumbWidth + borderWidth * 2,
       height: thumbHeight + borderWidth * 2,
     );
-    final borderRRect =
-        RRect.fromRectAndRadius(borderRect, const Radius.circular(6));
+    final borderRRect = RRect.fromRectAndRadius(borderRect, const Radius.circular(6));
     canvas
       ..drawRRect(
         borderRRect,

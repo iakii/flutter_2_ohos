@@ -80,8 +80,7 @@ class CustomSlider extends StatefulWidget {
   State<CustomSlider> createState() => _CustomSliderState();
 }
 
-class _CustomSliderState extends State<CustomSlider>
-    with SingleTickerProviderStateMixin {
+class _CustomSliderState extends State<CustomSlider> with SingleTickerProviderStateMixin {
   late AnimationController phaseController;
 
   @override
@@ -120,9 +119,7 @@ class _CustomSliderState extends State<CustomSlider>
   Widget build(BuildContext context) {
     return SliderTheme(
       data: SliderTheme.of(context).copyWith(
-        inactiveTrackColor: widget.isSquiglySliderEnabled
-            ? null
-            : Theme.of(context).colorScheme.secondaryContainer,
+        inactiveTrackColor: widget.isSquiglySliderEnabled ? null : Theme.of(context).colorScheme.secondaryContainer,
         trackHeight: widget.isSquiglySliderEnabled ? null : 8,
         thumbShape: widget.isSquiglySliderEnabled
             ? null
@@ -133,9 +130,7 @@ class _CustomSliderState extends State<CustomSlider>
             ? SquigglySliderTrackShape(
                 squiggleAmplitude: widget.squiggleAmplitude,
                 squiggleWavelength: widget.squiggleWavelength,
-                squigglePhaseFactor: widget.squiggleSpeed < 0
-                    ? 1 - phaseController.value
-                    : phaseController.value,
+                squigglePhaseFactor: widget.squiggleSpeed < 0 ? 1 - phaseController.value : phaseController.value,
               )
             : const RoundedRectSliderTrackShape(),
       ),

@@ -39,8 +39,7 @@ class Logger {
     // Check if stackTrace is not null, otherwise use an empty string
     final stackTraceMessage = stackTrace != null ? '$stackTrace' : '';
 
-    final logMessage =
-        '[$timestamp] $errorLocation:$errorMessage\n$stackTraceMessage';
+    final logMessage = '[$timestamp] $errorLocation:$errorMessage\n$stackTraceMessage';
 
     debugPrint(logMessage);
     _logs += '$logMessage\n';

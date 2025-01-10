@@ -19,13 +19,11 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:audio_service/audio_service.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-
+// Flutter imports:
+import 'package:flutter/material.dart';
 // Project imports:
 import 'package:musify/main.dart';
 import 'package:musify/screens/now_playing_page.dart';
@@ -50,14 +48,12 @@ class MiniPlayer extends StatelessWidget {
               pageBuilder: (context, animation, secondaryAnimation) {
                 return const NowPlayingPage();
               },
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
                 const begin = Offset(0, 1);
                 const end = Offset.zero;
 
                 final tween = Tween(begin: begin, end: end);
-                final curve =
-                    CurvedAnimation(parent: animation, curve: Curves.easeInOut);
+                final curve = CurvedAnimation(parent: animation, curve: Curves.easeInOut);
 
                 final offsetAnimation = tween.animate(curve);
 
@@ -78,8 +74,7 @@ class MiniPlayer extends StatelessWidget {
             const end = Offset.zero;
 
             final tween = Tween(begin: begin, end: end);
-            final curve =
-                CurvedAnimation(parent: animation, curve: Curves.easeInOut);
+            final curve = CurvedAnimation(parent: animation, curve: Curves.easeInOut);
 
             final offsetAnimation = tween.animate(curve);
 
@@ -105,8 +100,7 @@ class MiniPlayer extends StatelessWidget {
                   builder: (context, snapshot) {
                     final processingState = snapshot.data?.processingState;
                     final isPlaying = snapshot.data?.playing ?? false;
-                    final iconDataAndAction =
-                        getIconFromState(processingState, isPlaying);
+                    final iconDataAndAction = getIconFromState(processingState, isPlaying);
                     return GestureDetector(
                       onTap: iconDataAndAction.onPressed,
                       child: Icon(

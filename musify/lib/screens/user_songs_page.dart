@@ -19,12 +19,10 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-
+// Flutter imports:
+import 'package:flutter/material.dart';
 // Project imports:
 import 'package:musify/API/musify.dart';
 import 'package:musify/extensions/l10n.dart';
@@ -70,9 +68,7 @@ class _UserSongsPageState extends State<UserSongsPage> {
               },
               icon: Icon(
                 FluentIcons.re_order_24_filled,
-                color: _isEditEnabled
-                    ? Theme.of(context).colorScheme.inversePrimary
-                    : Theme.of(context).colorScheme.primary,
+                color: _isEditEnabled ? Theme.of(context).colorScheme.inversePrimary : Theme.of(context).colorScheme.primary,
               ),
             ),
         ],
@@ -207,8 +203,7 @@ class _UserSongsPageState extends State<UserSongsPage> {
                 final song = songsList[index];
                 song['isOffline'] = title == context.l10n!.offlineSongs;
 
-                final borderRadius =
-                    getItemBorderRadius(index, songsList.length);
+                final borderRadius = getItemBorderRadius(index, songsList.length);
 
                 return SongBar(
                   song,

@@ -32,14 +32,12 @@ class LyricsManager {
       return lyricsFromGoogle;
     }
 
-    final lyricsFromParolesNet =
-        await _fetchLyricsFromParolesNet(artistName.split(',')[0], title);
+    final lyricsFromParolesNet = await _fetchLyricsFromParolesNet(artistName.split(',')[0], title);
     if (lyricsFromParolesNet != null) {
       return lyricsFromParolesNet;
     }
 
-    final lyricsFromLyricsMania1 =
-        await _fetchLyricsFromLyricsMania1(artistName, title);
+    final lyricsFromLyricsMania1 = await _fetchLyricsFromLyricsMania1(artistName, title);
     return lyricsFromLyricsMania1;
   }
 
@@ -47,25 +45,19 @@ class LyricsManager {
     String artistName,
     String title,
   ) async {
-    const url =
-        'https://www.google.com/search?client=safari&rls=en&ie=UTF-8&oe=UTF-8&q=';
-    const delimiter1 =
-        '</div></div></div></div><div class="hwc"><div class="BNeawe tAd8D AP7Wnd"><div><div class="BNeawe tAd8D AP7Wnd">';
-    const delimiter2 =
-        '</div></div></div></div></div><div><span class="hwc"><div class="BNeawe uEec3 AP7Wnd">';
+    const url = 'https://www.google.com/search?client=safari&rls=en&ie=UTF-8&oe=UTF-8&q=';
+    const delimiter1 = '</div></div></div></div><div class="hwc"><div class="BNeawe tAd8D AP7Wnd"><div><div class="BNeawe tAd8D AP7Wnd">';
+    const delimiter2 = '</div></div></div></div></div><div><span class="hwc"><div class="BNeawe uEec3 AP7Wnd">';
 
     try {
-      final res = await http
-          .get(Uri.parse(Uri.encodeFull('$url$artistName - $title lyrics')))
-          .timeout(const Duration(seconds: 10));
+      final res = await http.get(Uri.parse(Uri.encodeFull('$url$artistName - $title lyrics'))).timeout(const Duration(seconds: 10));
       final body = res.body;
       final lyricsRes = body.substring(
         body.indexOf(delimiter1) + delimiter1.length,
         body.lastIndexOf(delimiter2),
       );
       if (lyricsRes.contains('<meta charset="UTF-8">')) return null;
-      if (lyricsRes.contains('please enable javascript on your web browser'))
-        return null;
+      if (lyricsRes.contains('please enable javascript on your web browser')) return null;
       if (lyricsRes.contains('Error 500 (Server Error)')) return null;
       if (lyricsRes.contains(
         'systems have detected unusual traffic from your computer network',
@@ -94,8 +86,7 @@ class LyricsManager {
         if (lyricsLines.length > 1) {
           lyricsLines.removeAt(0);
 
-          final finalLyrics =
-              addCopyright(lyricsLines.join('\n'), 'www.paroles.net');
+          final finalLyrics = addCopyright(lyricsLines.join('\n'), 'www.paroles.net');
           return _removeSpaces(finalLyrics);
         }
       }

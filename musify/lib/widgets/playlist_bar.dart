@@ -1,10 +1,8 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-
+import 'package:flutter/material.dart';
 // Project imports:
 import 'package:musify/API/musify.dart';
 import 'package:musify/extensions/l10n.dart';
@@ -98,14 +96,12 @@ class PlaylistBar extends StatelessWidget {
                       Text(
                         playlistTitle,
                         overflow: TextOverflow.ellipsis,
-                        style:
-                            commonBarTitleStyle.copyWith(color: primaryColor),
+                        style: commonBarTitleStyle.copyWith(color: primaryColor),
                       ),
                     ],
                   ),
                 ),
-                if (showBuildActions)
-                  _buildActionButtons(context, primaryColor),
+                if (showBuildActions) _buildActionButtons(context, primaryColor),
               ],
             ),
           ),
@@ -183,9 +179,7 @@ class PlaylistBar extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    playlistLikeStatus.value
-                        ? context.l10n!.removeFromLikedPlaylists
-                        : context.l10n!.addToLikedPlaylists,
+                    playlistLikeStatus.value ? context.l10n!.removeFromLikedPlaylists : context.l10n!.addToLikedPlaylists,
                   ),
                 ],
               ),

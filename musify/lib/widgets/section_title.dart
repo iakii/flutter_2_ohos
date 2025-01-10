@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:musify/widgets/marque.dart';
 
 class SectionTitle extends StatelessWidget {

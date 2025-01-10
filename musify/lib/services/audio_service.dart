@@ -19,19 +19,23 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Dart imports:
 import 'dart:async';
 import 'dart:math';
 
+// Package imports:
 import 'package:audio_service/audio_service.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:rxdart/rxdart.dart';
+
+// Project imports:
 import 'package:musify/API/musify.dart';
 import 'package:musify/main.dart';
 import 'package:musify/models/position_data.dart';
 import 'package:musify/services/data_manager.dart';
 import 'package:musify/services/settings_manager.dart';
 import 'package:musify/utilities/mediaitem.dart';
-import 'package:rxdart/rxdart.dart';
 
 class MusifyAudioHandler extends BaseAudioHandler {
   MusifyAudioHandler() {

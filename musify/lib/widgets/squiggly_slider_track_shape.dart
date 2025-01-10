@@ -23,9 +23,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Dart imports:
 import 'dart:math';
 import 'dart:ui';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 /// A squiggly Variant of the default [Slider] track.

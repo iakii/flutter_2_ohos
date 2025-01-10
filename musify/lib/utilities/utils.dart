@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:musify/utilities/common_variables.dart';
 
 BorderRadius getItemBorderRadius(int index, int totalLength) {

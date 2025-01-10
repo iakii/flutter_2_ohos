@@ -19,7 +19,10 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:musify/style/shapes/md3_slider_thumb.dart';
 import 'package:musify/widgets/squiggly_slider_track_shape.dart';
 

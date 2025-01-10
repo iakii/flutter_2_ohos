@@ -466,6 +466,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.1+1"
+  import_sorter:
+    dependency: "direct dev"
+    description:
+      name: import_sorter
+      sha256: eb15738ccead84e62c31e0208ea4e3104415efcd4972b86906ca64a1187d0836
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.6.0"
   intl:
     dependency: "direct main"
     description:
@@ -571,6 +579,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.1"
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      sha256: be4b23575aac7ebf01f225a241eb7f6b5641eeaf43c6a8613510fc2f8cf187d1
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.5.0"
   logging:
     dependency: transitive
     description:
@@ -749,6 +765,38 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.7.3"
+  pub_semver:
+    dependency: transitive
+    description:
+      name: pub_semver
+      sha256: "7b3cfbf654f3edd0c6298ecd5be782ce997ddf0e00531b9464b55245185bbbbd"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.5"
+  pubspec:
+    dependency: transitive
+    description:
+      name: pubspec
+      sha256: f534a50a2b4d48dc3bc0ec147c8bd7c304280fff23b153f3f11803c4d49d927e
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.3.0"
+  pubspec_dependency_sorter:
+    dependency: "direct dev"
+    description:
+      name: pubspec_dependency_sorter
+      sha256: d2114e92f003195de74a9ed3aeb9c59425ae9b7d637b802bb225b3fe3a4ba605
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.5"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      sha256: ea0b925899e64ecdfbf9c7becb60d5b50e706ade44a85b2363be2a22d88117d2
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.2.2"
   rxdart:
     dependency: "direct main"
     description:
@@ -850,6 +898,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.7.0"
+  tint:
+    dependency: transitive
+    description:
+      name: tint
+      sha256: "9652d9a589f4536d5e392cf790263d120474f15da3cf1bee7f1fdb31b4de5f46"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.1"
   translations_cleaner:
     dependency: "direct dev"
     description:
@@ -890,6 +946,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.0"
+  uri:
+    dependency: transitive
+    description:
+      name: uri
+      sha256: "889eea21e953187c6099802b7b4cf5219ba8f3518f604a1033064d45b1b8268a"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   uri_parser:
     dependency: transitive
     description:
@@ -1036,6 +1100,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.2"
+  yaml_writer:
+    dependency: transitive
+    description:
+      name: yaml_writer
+      sha256: "2ae2cd5f5a612a930ef2b1b40df540c819ab85e301f26dfaf0b6201b857db825"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.1"
   youtube_explode_dart:
     dependency: "direct main"
     description:

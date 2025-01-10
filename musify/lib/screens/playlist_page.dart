@@ -19,10 +19,16 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Dart imports:
 import 'dart:math';
 
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+
+// Project imports:
 import 'package:musify/API/musify.dart';
 import 'package:musify/extensions/l10n.dart';
 import 'package:musify/main.dart';

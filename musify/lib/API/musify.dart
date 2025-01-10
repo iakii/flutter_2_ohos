@@ -19,13 +19,21 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Dart imports:
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+// Flutter imports:
 import 'package:flutter/widgets.dart';
+
+// Package imports:
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+
+// Project imports:
 import 'package:musify/DB/albums.db.dart';
 import 'package:musify/DB/playlists.db.dart';
 import 'package:musify/extensions/l10n.dart';
@@ -35,8 +43,6 @@ import 'package:musify/services/lyrics_manager.dart';
 import 'package:musify/services/settings_manager.dart';
 import 'package:musify/utilities/flutter_toast.dart';
 import 'package:musify/utilities/formatter.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 final _yt = YoutubeExplode();
 

@@ -19,9 +19,14 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
-import 'package:dynamic_color/dynamic_color.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+
+// Package imports:
+import 'package:dynamic_color/dynamic_color.dart';
+
+// Project imports:
 import 'package:musify/services/settings_manager.dart';
 import 'package:musify/style/dynamic_color_temp_fix.dart';
 

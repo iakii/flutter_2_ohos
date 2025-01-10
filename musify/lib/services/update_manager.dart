@@ -19,11 +19,17 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Dart imports:
 import 'dart:convert';
 import 'dart:io';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:http/http.dart' as http;
+
+// Project imports:
 import 'package:musify/API/version.dart';
 import 'package:musify/extensions/l10n.dart';
 import 'package:musify/main.dart';

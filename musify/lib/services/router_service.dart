@@ -19,8 +19,13 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:go_router/go_router.dart';
+
+// Project imports:
 import 'package:musify/API/version.dart';
 import 'package:musify/screens/about_page.dart';
 import 'package:musify/screens/bottom_navigation_page.dart';

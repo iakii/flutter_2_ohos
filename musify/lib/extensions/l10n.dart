@@ -19,7 +19,10 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Flutter imports:
 import 'package:flutter/widgets.dart';
+
+// Package imports:
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 extension ContextX on BuildContext {

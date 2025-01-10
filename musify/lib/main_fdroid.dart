@@ -19,6 +19,7 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Project imports:
 import 'package:musify/main.dart' as m;
 
 void main() async {

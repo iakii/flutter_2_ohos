@@ -19,6 +19,7 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class MarqueeWidget extends StatefulWidget {

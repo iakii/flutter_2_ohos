@@ -19,8 +19,13 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+
+// Project imports:
 import 'package:musify/widgets/spinner.dart';
 
 class CustomSearchBar extends StatefulWidget {

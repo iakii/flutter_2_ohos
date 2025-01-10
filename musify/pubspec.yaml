@@ -1,130 +1,112 @@
 name: musify
-description: Music Streaming app made in Flutter!
-homepage: https://github.com/gokadzev/Musify
-repository: https://github.com/gokadzev/Musify
-issue_tracker: https://github.com/gokadzev/Musify/issues
-
-publish_to: "none"
-version: 9.0.3+110 # run update.sh after changing the version
-
+version: '9.0.3+110'
+homepage: 'https://github.com/gokadzev/Musify'
+publish_to: none
 environment:
-  sdk: ">=3.4.0 <4.0.0"
-
+  sdk: '>=3.4.0 <4.0.0'
+description: 'Music Streaming app made in Flutter!'
 dependencies:
   audio_service:
     git:
-      url: https://gitee.com/openharmony-sig/fluttertpc_audio_service.git
-      path: audio_service
+      url: 'https://gitee.com/openharmony-sig/fluttertpc_audio_service.git'
       ref: master
+      path: 'audio_service'
   audio_session:
     git:
-      url: https://gitee.com/openharmony-sig/flutter_audio_session.git
+      url: 'https://gitee.com/openharmony-sig/flutter_audio_session.git'
       ref: master
-  cached_network_image: ^3.4.1
-  collection: ^1.18.0
-  dynamic_color: ^1.7.0
+  cached_network_image: '^3.4.1'
+  collection: '^1.18.0'
+  dynamic_color: '^1.7.0'
   file_picker_ohos:
     git:
-      url: https://gitee.com/openharmony-sig/fluttertpc_file_picker.git
-      path: ohos
+      url: 'https://gitee.com/openharmony-sig/fluttertpc_file_picker.git'
       ref: master
-  fluentui_system_icons: ^1.1.270
+      path: ohos
+  fluentui_system_icons: '^1.1.270'
   flutter:
     sdk: flutter
-
-  flutter_flip_card: ^0.0.6
+  flutter_flip_card: '^0.0.6'
   flutter_localizations:
     sdk: flutter
   go_router:
     git:
-      url: https://gitee.com/openharmony-sig/flutter_packages.git
-      path: packages/go_router
+      url: 'https://gitee.com/openharmony-sig/flutter_packages.git'
       ref: master
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  html: ^0.15.4
-  http: ^1.2.2
-  intl: ^0.19.0
-  # just_audio:
-  #   git:
-  #     url: https://gitee.com/openharmony-sig/fluttertpc_just_audio.git
-  #     path: just_audio
-  #     ref: master
-  just_audio: ^0.9.42
-  just_audio_media_kit: ^2.0.6
+      path: 'packages/go_router'
+  hive: '^2.2.3'
+  hive_flutter: '^1.1.0'
+  html: '^0.15.4'
+  http: '^1.2.2'
+  intl: '^0.19.0'
+  just_audio: '^0.9.42'
+  just_audio_media_kit: '^2.0.6'
   just_audio_ohos:
     git:
-      url: https://gitee.com/openharmony-sig/fluttertpc_just_audio.git
-      path: just_audio/ohos
+      url: 'https://gitee.com/openharmony-sig/fluttertpc_just_audio.git'
       ref: master
-  media_kit_libs_windows_audio: ^1.0.9
+      path: 'just_audio/ohos'
   media_kit_libs_linux: any
   media_kit_libs_macos_audio: any
+  media_kit_libs_windows_audio: '^1.0.9'
   path_provider:
     git:
-      url: https://gitee.com/openharmony-sig/flutter_packages.git
-      path: packages/path_provider/path_provider
-  rxdart: ^0.27.7
+      url: 'https://gitee.com/openharmony-sig/flutter_packages.git'
+      path: 'packages/path_provider/path_provider'
+  rxdart: '^0.27.7'
   url_launcher:
     git:
-      url: https://gitee.com/openharmony-sig/flutter_packages.git
-      path: packages/url_launcher/url_launcher
-  youtube_explode_dart: ^2.3.6
-
+      url: 'https://gitee.com/openharmony-sig/flutter_packages.git'
+      path: 'packages/url_launcher/url_launcher'
+  youtube_explode_dart: '^2.3.6'
 dev_dependencies:
-  flutter_launcher_icons: ^0.14.2
-  flutter_lints: ^4.0.0
-  flutter_native_splash: ^2.2.19
+  flutter_launcher_icons: '^0.14.2'
+  flutter_lints: '^4.0.0'
+  flutter_native_splash: '^2.2.19'
   flutter_test:
     sdk: flutter
-
-  translations_cleaner: ^0.0.5
-
+  import_sorter: '^4.6.0'
+  pubspec_dependency_sorter: '^1.0.5'
+  translations_cleaner: '^0.0.5'
 dependency_overrides:
   audio_session:
     git:
-      url: https://gitee.com/openharmony-sig/flutter_audio_session.git
+      url: 'https://gitee.com/openharmony-sig/flutter_audio_session.git'
       ref: master
-
   path_provider:
     git:
-      url: https://gitee.com/openharmony-sig/flutter_packages.git
-      path: packages/path_provider/path_provider
-
+      url: 'https://gitee.com/openharmony-sig/flutter_packages.git'
+      path: 'packages/path_provider/path_provider'
+repository: 'https://github.com/gokadzev/Musify'
+issue_tracker: 'https://github.com/gokadzev/Musify/issues'
 flutter:
   generate: true
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/licenses/
-
   fonts:
     - family: paytoneOne
       fonts:
         - asset: fonts/paytone/PaytoneOne-Regular.ttf
-
 flutter_native_splash:
-  color: "#f9fafd"
-  image: assets/images/ic_splash.png
-  color_dark: "#151515"
-  image_dark: assets/images/ic_splash.png
-
+  color: '#f9fafd'
+  image: 'assets/images/ic_splash.png'
+  color_dark: '#151515'
+  image_dark: 'assets/images/ic_splash.png'
   android_12:
-    image: assets/images/ic_splash.png
-    image_dark: assets/images/ic_splash.png
-
+    image: 'assets/images/ic_splash.png'
+    image_dark: 'assets/images/ic_splash.png'
 flutter_launcher_icons:
   android: true
-  adaptive_icon_background: "#191919"
-  adaptive_icon_foreground: "assets/images/ic_launcher_foreground.png"
-  adaptive_icon_round: "assets/images/ic_launcher_round.png"
-  adaptive_icon_monochrome: "assets/images/ic_launcher_foreground.png"
-  image_path: "assets/images/ic_launcher.png"
+  adaptive_icon_background: '#191919'
+  adaptive_icon_foreground: 'assets/images/ic_launcher_foreground.png'
+  adaptive_icon_round: 'assets/images/ic_launcher_round.png'
+  adaptive_icon_monochrome: 'assets/images/ic_launcher_foreground.png'
+  image_path: 'assets/images/ic_launcher.png'
   windows:
     generate: true
-    image_path: "assets/images/ic_launcher_round.png"
-    icon_size: 256 # min:48, max:256, default: 48
+    image_path: 'assets/images/ic_launcher_round.png'
+    icon_size: 256
   macos:
     generate: true
-    image_path: "assets/images/ic_launcher_round.png"
+    image_path: 'assets/images/ic_launcher_round.png'

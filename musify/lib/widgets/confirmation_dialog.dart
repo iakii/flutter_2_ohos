@@ -19,7 +19,10 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:musify/extensions/l10n.dart';
 
 class ConfirmationDialog extends StatelessWidget {

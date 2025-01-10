@@ -19,7 +19,10 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:musify/utilities/common_variables.dart';
 
 class CustomBar extends StatelessWidget {

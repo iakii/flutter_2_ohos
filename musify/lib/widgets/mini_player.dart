@@ -19,9 +19,14 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:audio_service/audio_service.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:musify/main.dart';
 import 'package:musify/screens/now_playing_page.dart';
 import 'package:musify/widgets/marque.dart';

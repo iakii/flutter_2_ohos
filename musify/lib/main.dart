@@ -19,19 +19,26 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Dart imports:
 import 'dart:async';
 
-import 'package:audio_service/audio_service.dart';
-import 'package:dynamic_color/dynamic_color.dart';
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:audio_service/audio_service.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_media_kit/just_audio_media_kit.dart';
+import 'package:path_provider/path_provider.dart';
+
+// Project imports:
 import 'package:musify/services/audio_service.dart';
 import 'package:musify/services/data_manager.dart';
 import 'package:musify/services/logger_service.dart';
@@ -40,7 +47,6 @@ import 'package:musify/services/settings_manager.dart';
 import 'package:musify/services/update_manager.dart';
 import 'package:musify/style/app_themes.dart';
 import 'package:musify/utilities/proxy.dart';
-import 'package:path_provider/path_provider.dart';
 
 late MusifyAudioHandler audioHandler;
 

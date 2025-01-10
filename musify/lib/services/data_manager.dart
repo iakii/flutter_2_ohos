@@ -19,11 +19,17 @@
  *     please visit: https://github.com/gokadzev/Musify
  */
 
+// Dart imports:
 import 'dart:io';
 
-import 'package:file_picker_ohos/file_picker_ohos.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:file_picker_ohos/file_picker_ohos.dart';
 import 'package:hive/hive.dart';
+
+// Project imports:
 import 'package:musify/extensions/l10n.dart';
 import 'package:musify/main.dart';
 
